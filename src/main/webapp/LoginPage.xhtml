@@ -15,6 +15,12 @@
         <h:inputSecret value="#{loginBean.password}" id="password" required="true"/>
         <br/>
         <h:commandButton value="Login" action="#{loginBean.doLogin}"/>
+
     </h:form>
+
+
+    <h:link value="register" outcome="GeisterNetzMeldung"/>
+    <br/>
+    <h:link value="Ohne Anmeldung weiter" outcome="GeisterNetzMeldung"/>
 </f:view>
 </html>
