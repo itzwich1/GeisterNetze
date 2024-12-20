@@ -9,12 +9,12 @@
     <h2>Login</h2>
     <h:form action="login" method="post">
         <h:outputLabel for="username">Username:</h:outputLabel>
-        <h:inputText id="username" required="true" />
+        <h:inputText id="username" value="#{loginBean.username}" required="true" />
         <br/>
         <h:outputLabel for="password">Password:</h:outputLabel>
-        <h:inputText type="password" name="password" id="password" required="true"/>
+        <h:inputSecret value="#{loginBean.password}" id="password" required="true"/>
         <br/>
-        <button type="submit">Login</button>
+        <h:commandButton value="Login" action="#{loginBean.doLogin}"/>
     </h:form>
 </f:view>
 </html>
