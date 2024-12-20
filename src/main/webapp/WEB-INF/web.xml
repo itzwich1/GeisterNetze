@@ -7,5 +7,6 @@
     <welcome-file-list>
         <welcome-file>LoginPage.xhtml</welcome-file>
     </welcome-file-list>
+    
 
 </web-app>
