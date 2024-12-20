@@ -1,4 +1,4 @@
-package com.geisternetze.geisternetze;
+package com.geisternetze;
 
 import java.io.*;
 
