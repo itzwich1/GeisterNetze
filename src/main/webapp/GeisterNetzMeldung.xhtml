@@ -4,8 +4,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <f:view>
-    <h:outputLabel value="Hello, world"/>
+    <h:head>
+        <title>Meldung Erstellen</title>
+    </h:head>
+    <h:body>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9;">
+            <p:panel header="Meldung Erstellen" style="width: 500px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+
+                <h:form id="meldungForm">
+
+                    <p:messages autoUpdate="true" style="margin-bottom: 20px;" />
+
+                    <p:outputLabel for="anonym" value="Anonym:" style="display: block; margin-bottom: 5px;" />
+                    <p:selectBooleanCheckbox id="anonym" value="#{meldungBean.anonym}"
+                                             style="margin-bottom: 20px;" />
+
+                    <p:outputLabel for="vorname" value="Vorname:" style="display: block; margin-bottom: 5px;" />
+                    <p:inputText id="vorname" value="#{meldungBean.vorname}"
+                                 disabled="#{meldungBean.anonym}" required="true"
+                                 style="width: 100%; margin-bottom: 20px;" />
+
+                    <p:outputLabel for="nachname" value="Nachname:" style="display: block; margin-bottom: 5px;" />
+                    <p:inputText id="nachname" value="#{meldungBean.nachname}"
+                                 disabled="#{meldungBean.anonym}" required="true"
+                                 style="width: 100%; margin-bottom: 20px;" />
+
+                    <p:outputLabel for="telefonnummer" value="Telefonnummer:" style="display: block; margin-bottom: 5px;" />
+                    <p:inputText id="telefonnummer" value="#{meldungBean.telefonnummer}"
+                                 disabled="#{meldungBean.anonym}" required="true"
+                                 style="width: 100%; margin-bottom: 20px;" />
+
+                    <p:outputLabel for="breitengrad" value="Breitengrad:" style="display: block; margin-bottom: 5px;" />
+                    <p:inputText id="breitengrad" value="#{meldungBean.breitengrad}" required="true"
+                                 style="width: 100%; margin-bottom: 20px;" />
+
+                    <p:outputLabel for="laengengrad" value="Längengrad:" style="display: block; margin-bottom: 5px;" />
+                    <p:inputText id="laengengrad" value="#{meldungBean.laengengrad}" required="true"
+                                 style="width: 100%; margin-bottom: 20px;" />
+
+                    <p:commandButton value="Meldung Absenden" action="#{meldungBean.senden}"
+                                     styleClass="ui-button-success" style="width: 100%; margin-top: 20px;" />
+
+                </h:form>
+            </p:panel>
+        </div>
+    </h:body>
 </f:view>
 </html>
