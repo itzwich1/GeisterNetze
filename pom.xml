@@ -30,6 +30,11 @@
             <version>2.1.0</version>
         </dependency>
         <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>14.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>jakarta.nosql</groupId>
             <artifactId>jakarta.nosql-api</artifactId>
             <version>1.0.0-M1</version>
