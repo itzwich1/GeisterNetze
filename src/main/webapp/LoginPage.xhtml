@@ -17,7 +17,9 @@
             <p:panel header="Login" style="width: 400px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
                 <p:messages autoUpdate="true" style="margin-bottom: 20px;" />
 
-                <h:form>
+                <h:form id="loginForm">
+                    <p:messages autoUpdate="true" style="color: red; margin-bottom: 20px;" />
+
                     <p:outputLabel for="username" value="Username:" style="display: block; margin-bottom: 5px;" />
                     <p:inputText id="username" value="#{loginBean.username}" required="true"
                                  style="width: 100%; margin-bottom: 20px;" />
@@ -27,6 +29,7 @@
                                 style="width: 100%; margin-bottom: 20px;" />
 
                     <p:commandButton value="Login" action="#{loginBean.doLogin}"
+                                     update="username password messages"
                                      styleClass="ui-button-success" style="width: 100%; margin-bottom: 10px;" />
                 </h:form>
 

@@ -3,6 +3,10 @@ package com.geisternetze.beans;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.application.FacesMessage;
+import java.util.Iterator;
+
 import java.io.Serializable;
 
 
@@ -30,6 +34,11 @@ public class LoginBean implements Serializable {
     }
 
     public void doLogin(){
+
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        /*context.addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", "Benutzername darf nicht leer sein!"));*/
 
         System.out.println(this.username);
         System.out.println(this.password);

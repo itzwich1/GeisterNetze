@@ -65,4 +65,10 @@ public class MeldungBean implements Serializable{
         this.laengengrad = laengengrad;
     }
 
+    public void senden(){
+        System.out.println("MeldungBean senden");
+
+        //Hier speichern der eingaben in DB
+    }
+
 }
