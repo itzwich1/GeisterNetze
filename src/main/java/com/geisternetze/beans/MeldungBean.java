@@ -10,8 +10,6 @@ import java.io.Serializable;
 @RequestScoped
 public class MeldungBean implements Serializable{
 
-
-
     private boolean anonym;
     private String vorname;
     private String nachname;

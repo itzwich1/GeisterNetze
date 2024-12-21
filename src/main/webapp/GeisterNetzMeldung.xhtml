@@ -9,6 +9,13 @@
 <f:view>
     <h:head>
         <title>Meldung Erstellen</title>
+        <style type="text/css">
+            /* Stil für deaktivierte Felder */
+            input[disabled] {
+                background-color: #f0f0f0;
+                color: #a0a0a0;
+            }
+        </style>
     </h:head>
     <h:body>
         <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9;">
@@ -20,11 +27,13 @@
 
                     <p:outputLabel for="anonym" value="Anonym:" style="display: block; margin-bottom: 5px;" />
                     <p:selectBooleanCheckbox id="anonym" value="#{meldungBean.anonym}"
-                                             style="margin-bottom: 20px;" />
+                                             style="margin-bottom: 20px;">
+
+                        <p:ajax update="vorname nachname telefonnummer" />
+                    </p:selectBooleanCheckbox>
 
                     <p:outputLabel for="vorname" value="Vorname:" style="display: block; margin-bottom: 5px;" />
-                    <p:inputText id="vorname" value="#{meldungBean.vorname}"
-                                 disabled="#{meldungBean.anonym}" required="true"
+                    <p:inputText id="vorname" value="#{meldungBean.vorname}" required="true"
                                  style="width: 100%; margin-bottom: 20px;" />
 
                     <p:outputLabel for="nachname" value="Nachname:" style="display: block; margin-bottom: 5px;" />
