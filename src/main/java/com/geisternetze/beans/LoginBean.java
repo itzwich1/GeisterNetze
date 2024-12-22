@@ -1,5 +1,6 @@
 package com.geisternetze.beans;
 
+import com.geisternetze.services.AuthUserLogin;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
@@ -36,6 +37,9 @@ public class LoginBean implements Serializable {
     public void doLogin(){
 
         FacesContext context = FacesContext.getCurrentInstance();
+
+        AuthUserLogin userLogin;
+        userLogin = new AuthUserLogin();
 
         /*context.addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", "Benutzername darf nicht leer sein!"));*/
