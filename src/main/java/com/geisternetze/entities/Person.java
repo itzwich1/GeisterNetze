@@ -3,10 +3,6 @@ package com.geisternetze.entities;
 
 import jakarta.persistence.*;
 
-
-
-
-
 @Entity
 @Table(name="Person")
 public class Person {

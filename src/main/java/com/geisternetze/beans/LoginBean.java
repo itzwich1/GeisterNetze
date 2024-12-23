@@ -4,14 +4,6 @@ import com.geisternetze.services.AuthUserLogin;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
-import jakarta.faces.context.FacesContext;
-import jakarta.faces.application.FacesMessage;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-
-import java.util.Iterator;
-
 import java.io.Serializable;
 
 
@@ -39,12 +31,6 @@ public class LoginBean implements Serializable {
     }
 
     public void doLogin(){
-
-        FacesContext context = FacesContext.getCurrentInstance();
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-        EntityManager em = emf.createEntityManager();
-
 
         AuthUserLogin userLogin;
         userLogin = new AuthUserLogin();
