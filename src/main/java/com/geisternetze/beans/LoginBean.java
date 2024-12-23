@@ -1,5 +1,6 @@
 package com.geisternetze.beans;
 
+import com.geisternetze.TestData.GenerateTestUsers;
 import com.geisternetze.services.AuthUserLogin;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
@@ -10,6 +11,11 @@ import java.io.Serializable;
 @Named
 @RequestScoped
 public class LoginBean implements Serializable {
+
+    public LoginBean() {
+
+        GenerateTestUsers users = new GenerateTestUsers();
+    }
 
     private String username;
     private String password;

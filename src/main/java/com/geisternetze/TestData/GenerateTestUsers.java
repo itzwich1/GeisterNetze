@@ -18,36 +18,42 @@ public class GenerateTestUsers {
         EntityManager em = emf.createEntityManager();
 
         try {
-            // Neue Person erstellen
-            Person person = new Person();
-            person.setVorname("Max");
-            person.setNachname("Mustermann");
-            person.setTelefonnummer(123456789);
-            person.setRolle(Person.Role.BERGER);
 
-            // Neues Login erstellen
-            Login login = new Login();
-            login.setBenutzername("max.mustermann");
-            login.setPasswort("sicheresPasswort123");
-            login.setEmail("max.mustermann@example.com");
-            login.setErstelltAm(LocalDateTime.now());
-            login.setPerson(person); // Verknüpfung mit der Person
+            // Pruefen, ob Eintraege in der Login-Tabelle vorhanden sind
+            Long count = em.createQuery("SELECT COUNT(l) FROM Login l", Long.class).getSingleResult();
 
-            // Transaktion starten
-            em.getTransaction().begin();
+            if(count <= 0){
 
-            // Zuerst die Person speichern (wegen der Beziehung)
-            em.persist(person);
+                // Neue Person erstellen
+                Person person = new Person();
+                person.setVorname("Max");
+                person.setNachname("Mustermann");
+                person.setTelefonnummer(123456789);
+                person.setRolle(Person.Role.BERGER);
 
-            // Dann das Login speichern
-            em.persist(login);
+                // Neues Login erstellen
+                Login login = new Login();
+                login.setBenutzername("max.mustermann");
+                login.setPasswort("sicheresPasswort123");
+                login.setEmail("max.mustermann@example.com");
+                login.setErstelltAm(LocalDateTime.now());
+                login.setPerson(person); // Verknüpfung mit der Person
 
-            // Transaktion committen
-            em.getTransaction().commit();
+                // Transaktion starten
+                em.getTransaction().begin();
 
-            System.out.println("Person und Login erfolgreich hinzugefügt.");
-            System.out.println("Person-ID: " + person.getPersonID());
-            System.out.println("Login-ID: " + login.getLoginID());
+                // Zuerst die Person speichern (wegen der Beziehung)
+                em.persist(person);
+
+                // Dann das Login speichern
+                em.persist(login);
+
+                // Transaktion committen
+                em.getTransaction().commit();
+
+            }
+
+
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
