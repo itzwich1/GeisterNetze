@@ -21,7 +21,7 @@ public class Geisternetz {
     private Long geisternetzID;
 
     @Column(nullable = false)
-    private double längengrad;
+    private double laengengrad;
 
     @Column(nullable = false)
     private double breitengrad;
@@ -37,6 +37,9 @@ public class Geisternetz {
     @ManyToOne
     @JoinColumn()
     private Person berger;
+
+    @Column(nullable = false)
+    private int groesse;
 
     @Column(nullable = false)
     private LocalDateTime erfassungsdatum;
@@ -57,12 +60,12 @@ public class Geisternetz {
         this.geisternetzID = geisternetzID;
     }
 
-    public double getLängengrad() {
-        return längengrad;
+    public double getLaengengrad() {
+        return laengengrad;
     }
 
-    public void setLängengrad(double längengrad) {
-        this.längengrad = längengrad;
+    public void setLaengengrad(double laengengrad) {
+        this.laengengrad = laengengrad;
     }
 
     public double getBreitengrad() {
@@ -111,6 +114,14 @@ public class Geisternetz {
 
     public void setGeborgenAm(LocalDateTime geborgenAm) {
         this.geborgenAm = geborgenAm;
+    }
+
+    public int getGroesse() {
+        return groesse;
+    }
+
+    public void setGroesse(int groesse) {
+        this.groesse = groesse;
     }
 
 

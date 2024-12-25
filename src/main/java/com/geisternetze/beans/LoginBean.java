@@ -14,7 +14,8 @@ public class LoginBean implements Serializable {
 
     public LoginBean() {
 
-        GenerateTestUsers users = new GenerateTestUsers();
+        //TODO wenn Tabelle leer ist koennen hier Test user erzeugt werden
+        //GenerateTestUsers users = new GenerateTestUsers();
     }
 
     private String username;

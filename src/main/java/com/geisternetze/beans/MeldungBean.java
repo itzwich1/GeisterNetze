@@ -1,14 +1,18 @@
 package com.geisternetze.beans;
 
+import com.geisternetze.services.GeisternetzService;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
 
-
 @Named
 @RequestScoped
 public class MeldungBean implements Serializable{
+
+    @Inject
+    private GeisternetzService geisternetzService;
 
     private boolean anonym;
     private String vorname;
@@ -16,6 +20,7 @@ public class MeldungBean implements Serializable{
     private String telefonnummer;
     private String breitengrad;
     private String laengengrad;
+    private String groesse;
 
     public boolean isAnonym() {
         return anonym;
@@ -65,10 +70,25 @@ public class MeldungBean implements Serializable{
         this.laengengrad = laengengrad;
     }
 
+    public String getGroesse() {
+        return groesse;
+    }
+
+    public void setGroesse(String groesse) {
+        this.groesse = groesse;
+    }
+
     public void senden(){
         System.out.println("MeldungBean senden");
 
-        //Hier speichern der eingaben in DB
+
+        try{
+            geisternetzService.meldeGeisternetz(this.anonym,this.vorname,this.nachname,this.telefonnummer,Double.parseDouble(this.breitengrad),Double.parseDouble(this.laengengrad),Integer.parseInt(this.groesse));
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }
