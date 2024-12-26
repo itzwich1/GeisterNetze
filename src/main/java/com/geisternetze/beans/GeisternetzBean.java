@@ -2,6 +2,7 @@ package com.geisternetze.beans;
 
 
 import com.geisternetze.entities.Geisternetz;
+import com.geisternetze.entities.Person;
 import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.view.ViewScoped;
@@ -70,8 +71,6 @@ public class GeisternetzBean {
     }
 
     public void netzGeborgen(){
-        System.out.println("Netz Geborgen");
-        System.out.println(selectedNetz);
 
         selectedNetz.setStatus(Geisternetz.Status.GEBORGEN);
         selectedNetz.setGeborgenAm(LocalDateTime.now());
@@ -85,6 +84,19 @@ public class GeisternetzBean {
     }
 
     public void fuerBergungEintragen(){
+
+        List<Person> bergerList = em.createQuery("SELECT p FROM Person p WHERE p.rolle = 'BERGER'", Person.class).getResultList();
+
+
+
+        selectedNetz.setBerger(bergerList.get(0));
+        selectedNetz.setStatus(Geisternetz.Status.BERGUNG_BEVORSTEHEND);
+
+        em.getTransaction().begin();
+
+        em.persist(selectedNetz);
+
+        em.getTransaction().commit();
 
     }
 

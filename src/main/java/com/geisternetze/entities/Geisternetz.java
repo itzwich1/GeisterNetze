@@ -106,6 +106,9 @@ public class Geisternetz {
     }
 
     public String getErfassungsdatumFormatted() {
+        if (erfassungsdatum == null) {
+            return ""; // Leerer String, wenn der Wert null ist
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
         return erfassungsdatum.format(formatter);
     }
@@ -116,6 +119,14 @@ public class Geisternetz {
 
     public LocalDateTime getGeborgenAm() {
         return geborgenAm;
+    }
+
+    public String getGeborgenAmFormatted() {
+        if (geborgenAm == null) {
+            return ""; // Leerer String, wenn der Wert null ist
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        return geborgenAm.format(formatter);
     }
 
     public void setGeborgenAm(LocalDateTime geborgenAm) {

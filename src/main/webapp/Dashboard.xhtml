@@ -64,6 +64,11 @@
                     <p:column headerText="Geborgen von">
                         <h:outputText value="#{netz.berger.vorname} #{netz.berger.nachname}" />
                     </p:column>
+                    <p:column headerText="Geborgen am">
+                        <h:outputText value="#{netz.geborgenAmFormatted}">
+                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                        </h:outputText>
+                    </p:column>
                 </p:dataTable>
 
                 <p:contextMenu for="geisternetz">
