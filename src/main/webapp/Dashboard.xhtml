@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:outputLabel value="Hello, world"/>
+</f:view>
+
+<h:body>
+    <h1>Geisternetz Übersicht</h1>
+
+    <div class="card">
+        <h:form id="form">
+            <p:dataTable id="geisternetz" var="netz" value="#{geisternetzBean.geisternetzList}" rowKey="#{netz.geisternetzID}"
+                         selection="#{geisternetzBean.selectedNetz}" selectionMode="single">
+                <f:facet name="header">
+                    Geisternetz Übersicht
+                </f:facet>
+
+                <p:column headerText="Position">
+                    <h:outputText value="#{netz.laengengrad}, #{netz.breitengrad}" />
+                </p:column>
+                <p:column headerText="Erfassungsdatum">
+                    <h:outputText value="#{netz.erfassungsdatumFormatted}">
+                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Status">
+                    <h:outputText value="#{netz.status}" />
+                </p:column>
+                <p:column headerText="Größe">
+                    <h:outputText value="#{netz.groesse}" />
+                </p:column>
+            </p:dataTable>
+
+            <p:contextMenu for="geisternetz">
+                <p:menuitem value="Details anzeigen" update="netzDetail" icon="pi pi-search"
+                            oncomplete="PF('netzDialog').show()" actionListener="#{geisternetzBean.viewNetz}" />
+                <p:menuitem value="Löschen" update="geisternetz" icon="pi pi-times"
+                            action="#{geisternetzBean.deleteNetz}" />
+            </p:contextMenu>
+
+            <p:dialog header="Geisternetz Info" widgetVar="netzDialog" modal="true" showEffect="fade"
+                      hideEffect="fade" resizable="false">
+                <p:outputPanel id="netzDetail" style="text-align:center;">
+                    <div class="netz">
+                        <div class="netz-grid-item border-0" style="margin-bottom: 0">
+                            <div class="netz-grid-item-content">
+                                <div class="netz-name">Position: #{geisternetzBean.selectedNetz.laengengrad}, #{geisternetzBean.selectedNetz.breitengrad}</div>
+                                <div class="netz-description">Status: #{geisternetzBean.selectedNetz.status}</div>
+                                <div class="netz-size">Größe: #{geisternetzBean.selectedNetz.groesse}</div>
+                                <h:outputText value="Erfassungsdatum: #{geisternetzBean.selectedNetz.erfassungsdatum}">
+                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                                </h:outputText>
+                            </div>
+                        </div>
+                    </div>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </div>
+
+</h:body>
+
+</html>

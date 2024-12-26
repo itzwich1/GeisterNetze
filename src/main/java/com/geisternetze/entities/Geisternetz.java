@@ -3,6 +3,7 @@ package com.geisternetze.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "Geisternetz")
@@ -102,6 +103,11 @@ public class Geisternetz {
 
     public LocalDateTime getErfassungsdatum() {
         return erfassungsdatum;
+    }
+
+    public String getErfassungsdatumFormatted() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        return erfassungsdatum.format(formatter);
     }
 
     public void setErfassungsdatum(LocalDateTime erfassungsdatum) {

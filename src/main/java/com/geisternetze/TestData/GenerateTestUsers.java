@@ -33,8 +33,8 @@ public class GenerateTestUsers {
 
                 // Neues Login erstellen
                 Login login = new Login();
-                login.setBenutzername("max.mustermann");
-                login.setPasswort("sicheresPasswort123");
+                login.setBenutzername("max");
+                login.setPasswort("1234");
                 login.setEmail("max.mustermann@example.com");
                 login.setErstelltAm(LocalDateTime.now());
                 login.setPerson(person); // Verknüpfung mit der Person

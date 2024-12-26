@@ -1,8 +1,10 @@
 package com.geisternetze.beans;
 
+import com.geisternetze.TestData.GenerateTestGeisternetze;
 import com.geisternetze.TestData.GenerateTestUsers;
 import com.geisternetze.services.AuthUserLogin;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
@@ -15,8 +17,12 @@ public class LoginBean implements Serializable {
     public LoginBean() {
 
         //TODO wenn Tabelle leer ist koennen hier Test user erzeugt werden
-        //GenerateTestUsers users = new GenerateTestUsers();
+        GenerateTestUsers users = new GenerateTestUsers();
+        GenerateTestGeisternetze netze = new GenerateTestGeisternetze();
     }
+
+    @Inject
+    private AuthUserLogin authUserLogin;
 
     private String username;
     private String password;
@@ -37,16 +43,20 @@ public class LoginBean implements Serializable {
         this.password = password;
     }
 
-    public void doLogin(){
+    public String doLogin(){
 
-        AuthUserLogin userLogin;
-        userLogin = new AuthUserLogin();
+        boolean isAuthenticated = authUserLogin.authenticate(username,password);
 
-        /*context.addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", "Benutzername darf nicht leer sein!"));*/
+        if(isAuthenticated){
+            return "Dashboard.xhtml?faces-redirect=true";
 
-        System.out.println(this.username);
-        System.out.println(this.password);
+        }else{
+
+            System.out.println("Ungültige Anmeldedaten");
+            return "login.xhtml";
+        }
+
+
 
     }
 
