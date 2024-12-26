@@ -19,7 +19,23 @@
 
         <div class="card">
             <h:form id="form">
-                <p:dataTable id="geisternetz" var="netz" value="#{geisternetzBean.geisternetzList}" rowKey="#{netz.geisternetzID}"
+
+                <h:panelGrid columns="2" styleClass="mb-3">
+                    <!-- Filter für Status -->
+                    <h:outputLabel value="Status filtern:" for="statusFilter"/>
+                    <p:selectOneMenu id="statusFilter" value="#{geisternetzBean.filterStatus}" style="width: 100%;">
+                        <f:selectItem itemLabel="Alle" itemValue="" />
+                        <f:selectItem itemLabel="Gemeldet" itemValue="GEMELDET" />
+                        <f:selectItem itemLabel="Bergung bevorstehend" itemValue="BERGUNG_BEVORSTEHEND" />
+                        <f:selectItem itemLabel="Geborgen" itemValue="GEBORGEN" />
+                        <f:selectItem itemLabel="Verschollen" itemValue="VERSCHOLLEN" />
+                        <p:ajax update="geisternetz"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+
+
+
+                <p:dataTable id="geisternetz" var="netz" value="#{geisternetzBean.filteredGeisternetzList}" rowKey="#{netz.geisternetzID}"
                              selection="#{geisternetzBean.selectedNetz}" selectionMode="single">
                     <f:facet name="header">
                         Geisternetz Übersicht
@@ -44,8 +60,10 @@
                 <p:contextMenu for="geisternetz">
                     <p:menuitem value="Details anzeigen" update="netzDetail" icon="pi pi-search"
                                 oncomplete="PF('netzDialog').show()" actionListener="#{geisternetzBean.viewNetz}" />
-                    <p:menuitem value="Löschen" update="geisternetz" icon="pi pi-times"
-                                action="#{geisternetzBean.deleteNetz}" />
+                    <p:menuitem value="Netz geborgen" update="geisternetz" icon="pi pi-check"
+                                action="#{geisternetzBean.netzGeborgen}" />
+                    <p:menuitem value="Netz geborgen" update="geisternetz" icon="pi pi-user-plus"
+                                action="#{geisternetzBean.netzGeborgen}" />
                 </p:contextMenu>
 
                 <p:dialog header="Geisternetz Info" widgetVar="netzDialog" modal="true" showEffect="fade"

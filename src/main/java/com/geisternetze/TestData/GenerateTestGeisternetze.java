@@ -68,6 +68,15 @@ public class GenerateTestGeisternetze {
                 geisternetz3.setErfassungsdatum(LocalDateTime.now());
                 geisternetz3.setMelder(melder3);
 
+                // Beispiel-Geisternetz 4 erstellen
+                Geisternetz geisternetz4 = new Geisternetz();
+                geisternetz4.setLaengengrad(14.5678);
+                geisternetz4.setBreitengrad(80.1123);
+                geisternetz4.setGroesse(10);
+                geisternetz4.setStatus(Geisternetz.Status.GEMELDET);
+                geisternetz4.setErfassungsdatum(LocalDateTime.now());
+                geisternetz4.setMelder(melder3);
+
                 // Transaktion starten
                 em.getTransaction().begin();
 
@@ -80,6 +89,7 @@ public class GenerateTestGeisternetze {
                 em.persist(geisternetz1);
                 em.persist(geisternetz2);
                 em.persist(geisternetz3);
+                em.persist(geisternetz4);
 
                 // Transaktion committen
                 em.getTransaction().commit();

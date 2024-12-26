@@ -11,7 +11,9 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Named
 @RequestScoped
@@ -21,18 +23,34 @@ public class GeisternetzBean {
     EntityManager em = emf.createEntityManager();
 
 
+    // Filterkriterium für den Status
+    private String filterStatus = "";
 
-    public List<Geisternetz> getGeisternetzList() {
-        // JPQL-Abfrage, um alle Geisternetz-Daten zu holen
-        var netze = em.createQuery("SELECT g FROM Geisternetz g", Geisternetz.class).getResultList();
-        for(var netz : netze){
-            System.out.println("Breitengrad: " + netz.getBreitengrad() +" , "+ netz.getErfassungsdatum()+" , "+ netz.getStatus());
-        }
-        return em.createQuery("SELECT g FROM Geisternetz g", Geisternetz.class).getResultList();
-    }
 
     // Eigenschaft für das ausgewählte Geisternetz
     private Geisternetz selectedNetz;
+
+    // Getter und Setter für Filterstatus
+    public String getFilterStatus() {
+        return filterStatus;
+    }
+
+    public void setFilterStatus(String filterStatus) {
+        this.filterStatus = filterStatus;
+    }
+
+    public List<Geisternetz> getGeisternetzList() {
+        return em.createQuery("SELECT g FROM Geisternetz g", Geisternetz.class).getResultList();
+    }
+
+    public List<Geisternetz> getFilteredGeisternetzList() {
+        if (filterStatus == null || filterStatus.isEmpty()) {
+            return getGeisternetzList(); // Keine Filterung, alle Einträge anzeigen
+        }
+        return getGeisternetzList().stream()
+                .filter(netz -> netz.getStatus().name().equals(filterStatus))
+                .collect(Collectors.toList());
+    }
 
     // Getter und Setter für das ausgewählte Geisternetz
     public Geisternetz getSelectedNetz() {
@@ -51,7 +69,19 @@ public class GeisternetzBean {
         }
     }
 
+    public void netzGeborgen(){
+        System.out.println("Netz Geborgen");
+        System.out.println(selectedNetz);
 
+        selectedNetz.setStatus(Geisternetz.Status.GEBORGEN);
+        selectedNetz.setGeborgenAm(LocalDateTime.now());
 
+        em.getTransaction().begin();
+
+        em.persist(selectedNetz);
+
+        em.getTransaction().commit();
+
+    }
 
 }
