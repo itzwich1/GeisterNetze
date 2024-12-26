@@ -84,4 +84,8 @@ public class GeisternetzBean {
 
     }
 
+    public void fuerBergungEintragen(){
+
+    }
+
 }

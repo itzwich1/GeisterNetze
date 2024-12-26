@@ -55,6 +55,15 @@
                     <p:column headerText="Größe">
                         <h:outputText value="#{netz.groesse}" />
                     </p:column>
+                    <p:column headerText="Gemeldet von">
+                        <h:outputText value="#{netz.melder.vorname}" />
+                    </p:column>
+                    <p:column headerText="Telefonnummer Melder">
+                        <h:outputText value="#{netz.melder.telefonnummer}" />
+                    </p:column>
+                    <p:column headerText="Geborgen von">
+                        <h:outputText value="#{netz.berger.vorname} #{netz.berger.nachname}" />
+                    </p:column>
                 </p:dataTable>
 
                 <p:contextMenu for="geisternetz">
@@ -62,8 +71,8 @@
                                 oncomplete="PF('netzDialog').show()" actionListener="#{geisternetzBean.viewNetz}" />
                     <p:menuitem value="Netz geborgen" update="geisternetz" icon="pi pi-check"
                                 action="#{geisternetzBean.netzGeborgen}" />
-                    <p:menuitem value="Netz geborgen" update="geisternetz" icon="pi pi-user-plus"
-                                action="#{geisternetzBean.netzGeborgen}" />
+                    <p:menuitem value="Für Bergung eintragen" update="geisternetz" icon="pi pi-user-plus"
+                                action="#{geisternetzBean.fuerBergungEintragen}" />
                 </p:contextMenu>
 
                 <p:dialog header="Geisternetz Info" widgetVar="netzDialog" modal="true" showEffect="fade"
