@@ -43,8 +43,8 @@ public class GenerateTestGeisternetze {
 
                 // Beispiel-Geisternetz 1 erstellen
                 Geisternetz geisternetz1 = new Geisternetz();
-                geisternetz1.setLaengengrad(12.3456);
-                geisternetz1.setBreitengrad(78.9101);
+                geisternetz1.setLaengengrad(5.712518);
+                geisternetz1.setBreitengrad(38.382651);
                 geisternetz1.setGroesse(20);
                 geisternetz1.setStatus(Geisternetz.Status.GEMELDET);
                 geisternetz1.setErfassungsdatum(LocalDateTime.now());
@@ -52,8 +52,8 @@ public class GenerateTestGeisternetze {
 
                 // Beispiel-Geisternetz 2 erstellen
                 Geisternetz geisternetz2 = new Geisternetz();
-                geisternetz2.setLaengengrad(13.4567);
-                geisternetz2.setBreitengrad(79.0112);
+                geisternetz2.setLaengengrad(-0.790834);
+                geisternetz2.setBreitengrad(50.141270);
                 geisternetz2.setGroesse(15);
                 geisternetz2.setStatus(Geisternetz.Status.BERGUNG_BEVORSTEHEND);
                 geisternetz2.setErfassungsdatum(LocalDateTime.now());
@@ -61,8 +61,8 @@ public class GenerateTestGeisternetze {
 
                 // Beispiel-Geisternetz 3 erstellen
                 Geisternetz geisternetz3 = new Geisternetz();
-                geisternetz3.setLaengengrad(14.5678);
-                geisternetz3.setBreitengrad(80.1123);
+                geisternetz3.setLaengengrad(17.943035);
+                geisternetz3.setBreitengrad(58.168888);
                 geisternetz3.setGroesse(10);
                 geisternetz3.setStatus(Geisternetz.Status.GEBORGEN);
                 geisternetz3.setErfassungsdatum(LocalDateTime.now());
@@ -70,8 +70,8 @@ public class GenerateTestGeisternetze {
 
                 // Beispiel-Geisternetz 4 erstellen
                 Geisternetz geisternetz4 = new Geisternetz();
-                geisternetz4.setLaengengrad(14.5678);
-                geisternetz4.setBreitengrad(80.1123);
+                geisternetz4.setLaengengrad(6.132732);
+                geisternetz4.setBreitengrad(54.352951);
                 geisternetz4.setGroesse(10);
                 geisternetz4.setStatus(Geisternetz.Status.GEMELDET);
                 geisternetz4.setErfassungsdatum(LocalDateTime.now());

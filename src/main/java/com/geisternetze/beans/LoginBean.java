@@ -24,6 +24,8 @@ public class LoginBean implements Serializable {
     @Inject
     private AuthUserLogin authUserLogin;
 
+
+
     private String username;
     private String password;
 
@@ -48,6 +50,7 @@ public class LoginBean implements Serializable {
         boolean isAuthenticated = authUserLogin.authenticate(username,password);
 
         if(isAuthenticated){
+
             return "Dashboard.xhtml?faces-redirect=true";
 
         }else{

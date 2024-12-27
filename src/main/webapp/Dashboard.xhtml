@@ -10,12 +10,19 @@
     <h:head>
         <!-- Bootstrap CSS einbinden -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" type=""></script>
+        
         <title>Geisternetz Übersicht</title>
     </h:head>
 
 
     <h:body>
-        <h1>Geisternetz Übersicht</h1>
+        <h1>Willkommen, #{userSessionBean.username}!</h1>
 
         <div class="card">
             <h:form id="form">
@@ -99,6 +106,30 @@
                 </p:dialog>
             </h:form>
         </div>
+
+        <h2>Nicht geborgene Netze</h2>
+        <div style="height: 500px; width: 100%;" id="map"></div>
+
+        <script>
+            // Initialisiere die Karte
+            var map = L.map('map').setView([51.505, -0.09], 13);
+
+            // OpenStreetMap-Kachel-Layer hinzufügen
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Dynamische Marker aus der Bean
+            var markers = JSON.parse('#{mapBean.markersAsJson}');
+
+            // Marker auf der Karte hinzufügen
+            markers.forEach(function(marker) {
+                L.marker([marker.lat, marker.lng]).addTo(map).bindPopup(marker.description);
+            });
+        </script>
+
+
 
     </h:body>
 

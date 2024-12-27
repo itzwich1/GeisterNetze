@@ -3,14 +3,12 @@ package com.geisternetze.beans;
 
 import com.geisternetze.entities.Geisternetz;
 import com.geisternetze.entities.Person;
-import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.PersistenceContext;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,6 +21,8 @@ public class GeisternetzBean {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
     EntityManager em = emf.createEntityManager();
 
+    @Inject
+    UserSessionBean usersession;
 
     // Filterkriterium für den Status
     private String filterStatus = "";
@@ -85,11 +85,9 @@ public class GeisternetzBean {
 
     public void fuerBergungEintragen(){
 
-        List<Person> bergerList = em.createQuery("SELECT p FROM Person p WHERE p.rolle = 'BERGER'", Person.class).getResultList();
+        Person berger = em.find(Person.class, usersession.getUserId());
 
-
-
-        selectedNetz.setBerger(bergerList.get(0));
+        selectedNetz.setBerger(berger);
         selectedNetz.setStatus(Geisternetz.Status.BERGUNG_BEVORSTEHEND);
 
         em.getTransaction().begin();
