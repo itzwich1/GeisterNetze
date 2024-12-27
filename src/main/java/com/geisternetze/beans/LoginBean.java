@@ -24,8 +24,6 @@ public class LoginBean implements Serializable {
     @Inject
     private AuthUserLogin authUserLogin;
 
-
-
     private String username;
     private String password;
 

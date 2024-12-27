@@ -1,5 +1,6 @@
 package com.geisternetze.beans;
 
+import com.geisternetze.entities.Geisternetz;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
@@ -8,22 +9,25 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 @Named
 @RequestScoped
 public class MapBean {
 
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+    EntityManager em = emf.createEntityManager();
+
     public List<Marker> getMarkers() {
         List<Marker> markers = new ArrayList<>();
 
+        List<Geisternetz> netze = em.createQuery("SELECT g FROM Geisternetz g WHERE status='GEMELDET' or status='BERGUNG_BEVORSTEHEND'", Geisternetz.class).getResultList();
 
-        //54.352951, 6.132732
-        //58.168888, 17.943035
-        //50.141270, -0.790834
-        //38.382651, 5.712518
-        markers.add(new Marker(-20.0, 90.0, "Indischer Ozean"));
-        markers.add(new Marker(-15.0, -140.0, "Pazifischer Ozean"));
-        markers.add(new Marker(40.7128, -74.0060, "New York"));
+        for(Geisternetz netz : netze){
+            markers.add(new Marker(netz.getBreitengrad(), netz.getLaengengrad(), ""));
+        }
         return markers;
     }
 
