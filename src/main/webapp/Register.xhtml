@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+
+    <h:head>
+        <title>Benutzerregistrierung</title>
+        <!-- Bootstrap CSS für Styling -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    </h:head>
+
+    <h:body>
+        <h1>Registrierung</h1>
+
+        <div class="card" style="padding: 20px; max-width: 600px; margin: 0 auto;">
+            <h:form id="registrationForm">
+                <!-- E-Mail -->
+                <h:outputLabel for="email" value="E-Mail:" styleClass="form-label"/>
+                <p:inputText id="email" value="#{registerBean.email}" required="true" type="email"
+                             styleClass="form-control" requiredMessage="E-Mail ist erforderlich"/>
+                <p:message for="email" display="text" styleClass="text-danger"/>
+
+                <!-- Benutzername -->
+                <h:outputLabel for="username" value="Benutzername:" styleClass="form-label"/>
+                <p:inputText id="username" value="#{registerBean.username}" required="true"
+                             styleClass="form-control" requiredMessage="Benutzername ist erforderlich"/>
+                <p:message for="username" display="text" styleClass="text-danger"/>
+
+                <!-- Passwort -->
+                <h:outputLabel for="password" value="Passwort:" styleClass="form-label"/>
+                <p:password id="password" value="#{registerBean.password}" required="true"
+                            styleClass="form-control" requiredMessage="Passwort ist erforderlich"/>
+                <p:message for="password" display="text" styleClass="text-danger"/>
+
+                <!-- Vorname -->
+                <h:outputLabel for="firstname" value="Vorname:" styleClass="form-label"/>
+                <p:inputText id="firstname" value="#{registerBean.firstname}" required="true"
+                             styleClass="form-control" requiredMessage="Vorname ist erforderlich"/>
+                <p:message for="firstname" display="text" styleClass="text-danger"/>
+
+                <!-- Nachname -->
+                <h:outputLabel for="lastname" value="Nachname:" styleClass="form-label"/>
+                <p:inputText id="lastname" value="#{registerBean.lastname}" required="true"
+                             styleClass="form-control" requiredMessage="Nachname ist erforderlich"/>
+                <p:message for="lastname" display="text" styleClass="text-danger"/>
+
+                <!-- Rolle -->
+                <h:outputLabel for="role" value="Rolle:" styleClass="form-label"/>
+                <p:selectOneMenu id="role" value="#{registerBean.role}" required="true"
+                                 styleClass="form-select" requiredMessage="Rolle ist erforderlich">
+                    <f:selectItem itemLabel="-- Wähle eine Rolle --" itemValue="" />
+                    <f:selectItem itemLabel="Berger" itemValue="BERGER" />
+                    <f:selectItem itemLabel="Melder" itemValue="MELDER" />
+                </p:selectOneMenu>
+                <p:message for="role" display="text" styleClass="text-danger"/>
+
+                <!-- Telefonnummer -->
+                <h:outputLabel for="phone" value="Telefonnummer:" styleClass="form-label"/>
+                <p:inputText id="phone" value="#{registerBean.phone}" required="true"
+                             styleClass="form-control" requiredMessage="Telefonnummer ist erforderlich"/>
+                <p:message for="phone" display="text" styleClass="text-danger"/>
+
+                <!-- Registrieren-Button -->
+                <p:commandButton value="Registrieren" action="#{registerBean.register}"
+                                 update="@form" styleClass="btn btn-primary mt-3"/>
+            </h:form>
+        </div>
+    </h:body>
+
+</f:view>
+</html>
