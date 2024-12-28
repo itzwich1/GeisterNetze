@@ -1,6 +1,7 @@
 package com.geisternetze.beans;
 
 import com.geisternetze.entities.Geisternetz;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import org.primefaces.model.map.*;
 
 @Named
 @RequestScoped
@@ -20,61 +22,38 @@ public class MapBean {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
     EntityManager em = emf.createEntityManager();
 
-    public List<Marker> getMarkers() {
-        List<Marker> markers = new ArrayList<>();
+    private MapModel<Long> simpleModel;
+    private LatLng initialCenter;
 
-        List<Geisternetz> netze = em.createQuery("SELECT g FROM Geisternetz g WHERE status='GEMELDET' or status='BERGUNG_BEVORSTEHEND'", Geisternetz.class).getResultList();
+    @PostConstruct
+    public void init() {
+        simpleModel = new DefaultMapModel();
 
-        for(Geisternetz netz : netze){
-            markers.add(new Marker(netz.getBreitengrad(), netz.getLaengengrad(), ""));
+        List<Geisternetz> netze = em.createQuery(
+                "SELECT g FROM Geisternetz g WHERE g.status='GEMELDET' OR g.status='BERGUNG_BEVORSTEHEND'",
+                Geisternetz.class).getResultList();
+
+        if (!netze.isEmpty()) {
+            Geisternetz firstNetz = netze.get(0);
+            initialCenter = new LatLng(firstNetz.getBreitengrad(), firstNetz.getLaengengrad());
+        } else {
+            initialCenter = new LatLng(51.1657, 10.4515); // Deutschland
         }
-        return markers;
+
+
+        for (Geisternetz netz : netze) {
+            LatLng coords = new LatLng(netz.getBreitengrad(), netz.getLaengengrad());
+            String description = "Netz ID: " + netz.getGeisternetzID() + ", Status: " + netz.getStatus();
+            simpleModel.addOverlay(new Marker(coords, description, netz.getGeisternetzID()));
+        }
     }
 
-    public String getMarkersAsJson() {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.writeValueAsString(getMarkers());
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return "[]";
-        }
+    public MapModel<Long> getSimpleModel() {
+        return simpleModel;
     }
 
-    public static class Marker {
-        private double lat;
-        private double lng;
-        private String description;
-
-        public Marker(double lat, double lng, String description) {
-            this.lat = lat;
-            this.lng = lng;
-            this.description = description;
-        }
-
-        public double getLat() {
-            return lat;
-        }
-
-        public void setLat(double lat) {
-            this.lat = lat;
-        }
-
-        public double getLng() {
-            return lng;
-        }
-
-        public void setLng(double lng) {
-            this.lng = lng;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
+    public String getInitialCenter() {
+        return initialCenter.getLat() + "," + initialCenter.getLng();
     }
 
 }
