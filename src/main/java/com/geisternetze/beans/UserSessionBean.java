@@ -1,6 +1,7 @@
 package com.geisternetze.beans;
 
 
+import com.geisternetze.entities.Person;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
@@ -12,6 +13,16 @@ public class UserSessionBean implements Serializable {
 
     private Long userId;
     private String username;
+
+    public Person.Role getRolle() {
+        return rolle;
+    }
+
+    public void setRolle(Person.Role rolle) {
+        this.rolle = rolle;
+    }
+
+    private Person.Role rolle;
 
     public Long getUserId() {
         return userId;

@@ -20,10 +20,10 @@ public class RegisterBean {
     private EntityManager em = emf.createEntityManager();
 
     private String email;
-    private String username;
+    private String benutzername;
     private String password;
-    private String firstname;
-    private String lastname;
+    private String vorname;
+    private String nachname;
     private Person.Role role;
     private int phone;
 
@@ -36,12 +36,12 @@ public class RegisterBean {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
+    public String getBenutzername() {
+        return benutzername;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setBenutzername(String benutzername) {
+        this.benutzername = benutzername;
     }
 
     public String getPassword() {
@@ -52,20 +52,20 @@ public class RegisterBean {
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getVorname() {
+        return vorname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getNachname() {
+        return nachname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
     }
 
     public Person.Role getRole() {
@@ -91,15 +91,15 @@ public class RegisterBean {
         try{
 
             Login login = new Login();
-            login.setBenutzername(username);
+            login.setBenutzername(benutzername);
             login.setPasswort(password);
             login.setEmail(email);
             login.setErstelltAm(LocalDateTime.now());
 
             Person person = new Person();
             person.setTelefonnummer(phone);
-            person.setVorname(firstname);
-            person.setNachname(lastname);
+            person.setVorname(vorname);
+            person.setNachname(nachname);
             person.setRolle(role);
 
             login.setPerson(person);

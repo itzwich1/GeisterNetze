@@ -14,6 +14,10 @@ import java.io.Serializable;
 @RequestScoped
 public class LoginBean implements Serializable {
 
+
+    @Inject
+    private UserSessionBean userSession;
+
     public LoginBean() {
 
         //TODO wenn Tabelle leer ist koennen hier Test user erzeugt werden
@@ -48,6 +52,9 @@ public class LoginBean implements Serializable {
         boolean isAuthenticated = authUserLogin.authenticate(username,password);
 
         if(isAuthenticated){
+
+            //userSession.getRolle().toString();
+            System.out.println(userSession.getRolle().toString());
 
             return "Dashboard.xhtml?faces-redirect=true";
 
