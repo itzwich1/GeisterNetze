@@ -9,6 +9,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.time.LocalDateTime;
+
 @Named
 @RequestScoped
 public class RegisterBean {
@@ -91,6 +93,8 @@ public class RegisterBean {
             Login login = new Login();
             login.setBenutzername(username);
             login.setPasswort(password);
+            login.setEmail(email);
+            login.setErstelltAm(LocalDateTime.now());
 
             Person person = new Person();
             person.setTelefonnummer(phone);
@@ -102,6 +106,7 @@ public class RegisterBean {
 
             em.getTransaction().begin();
             em.persist(person);
+            em.persist(login);
             em.getTransaction().commit();
 
 
