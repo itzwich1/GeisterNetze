@@ -1,23 +1,18 @@
 package com.geisternetze.beans;
 
 
-import com.geisternetze.entities.Login;
 import com.geisternetze.entities.Person;
+import com.geisternetze.services.RegisterService;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-
-import java.time.LocalDateTime;
 
 @Named
 @RequestScoped
 public class RegisterBean {
 
-    // EntityManager für die Datenbankoperationen
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-    private EntityManager em = emf.createEntityManager();
+    @Inject
+    private RegisterService registerService;
 
     private String email;
     private String benutzername;
@@ -25,7 +20,7 @@ public class RegisterBean {
     private String vorname;
     private String nachname;
     private Person.Role role;
-    private int phone;
+    private int telefonnummer;
 
     // Getter und Setter
     public String getEmail() {
@@ -76,12 +71,12 @@ public class RegisterBean {
         this.role = role;
     }
 
-    public int getPhone() {
-        return phone;
+    public int getTelefonnummer() {
+        return telefonnummer;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setTelefonnummer(int telefonnummer) {
+        this.telefonnummer = telefonnummer;
     }
 
     // Registrierungsmethode
@@ -90,25 +85,8 @@ public class RegisterBean {
 
         try{
 
-            Login login = new Login();
-            login.setBenutzername(benutzername);
-            login.setPasswort(password);
-            login.setEmail(email);
-            login.setErstelltAm(LocalDateTime.now());
-
-            Person person = new Person();
-            person.setTelefonnummer(phone);
-            person.setVorname(vorname);
-            person.setNachname(nachname);
-            person.setRolle(role);
-
-            login.setPerson(person);
-
-            em.getTransaction().begin();
-            em.persist(person);
-            em.persist(login);
-            em.getTransaction().commit();
-
+            // Registrierung über den Service delegieren
+            registerService.registerUser(benutzername, password, email, vorname, nachname, role, telefonnummer);
 
             // Beispiel: Weiterleitung zur Login-Seite nach erfolgreicher Registrierung
             return "LoginPage.xhtml?faces-redirect=true";
