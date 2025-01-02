@@ -2,7 +2,8 @@ package com.geisternetze.beans;
 
 import com.geisternetze.TestData.GenerateTestGeisternetze;
 import com.geisternetze.TestData.GenerateTestUsers;
-import com.geisternetze.services.AuthUserLogin;
+import com.geisternetze.entities.Person;
+import com.geisternetze.services.AuthUserLoginService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -19,14 +20,12 @@ public class LoginBean implements Serializable {
     private UserSessionBean userSession;
 
     public LoginBean() {
-
-        //TODO wenn Tabelle leer ist koennen hier Test user erzeugt werden
         GenerateTestUsers users = new GenerateTestUsers();
         GenerateTestGeisternetze netze = new GenerateTestGeisternetze();
     }
 
     @Inject
-    private AuthUserLogin authUserLogin;
+    private AuthUserLoginService authUserLoginService;
 
     private String username;
     private String password;
@@ -49,22 +48,26 @@ public class LoginBean implements Serializable {
 
     public String doLogin(){
 
-        boolean isAuthenticated = authUserLogin.authenticate(username,password);
+        boolean isAuthenticated = authUserLoginService.authenticate(username,password);
 
         if(isAuthenticated){
 
-            //userSession.getRolle().toString();
             System.out.println(userSession.getRolle().toString());
+            if(userSession.getRolle() == Person.Role.BERGER){
+                return "Dashboard.xhtml?faces-redirect=true";
+            }else if(userSession.getRolle() == Person.Role.MELDER){
+                return "Dashboard.xhtml?faces-redirect=true";
+            }else{
+                System.out.println("Undefinierte Rolle");
+                return "login.xhtml";
+            }
 
-            return "Dashboard.xhtml?faces-redirect=true";
 
         }else{
 
             System.out.println("Ungültige Anmeldedaten");
             return "login.xhtml";
         }
-
-
 
     }
 

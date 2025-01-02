@@ -6,24 +6,20 @@ import com.geisternetze.beans.UserSessionBean;
 import com.geisternetze.entities.Login;
 import com.geisternetze.entities.Person;
 import jakarta.ejb.Stateless;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 
 @Stateless
-public class AuthUserLogin {
+public class AuthUserLoginService {
 
+    @PersistenceContext
+    private EntityManager em;
 
     @Inject
     private UserSessionBean userSession;
 
     public boolean authenticate(String username, String password){
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-            EntityManager em = emf.createEntityManager();
 
             // Login-Abfrage
             TypedQuery<Login> loginQuery = em.createQuery(
@@ -43,23 +39,19 @@ public class AuthUserLogin {
                 // Rolle der Person aus der Datenbank abfragen
                 Person person = em.find(Person.class, login.getPerson().getPersonID());
                 if (person != null) {
-                    userSession.setRolle(person.getRolle()); // Rolle in die Session speichern
+                    userSession.setRolle(person.getRolle());
                 }
             }
-
-            em.close();
-            emf.close();
 
             return login != null;
 
         } catch (Exception e) {
-            // Logge den Fehler (kann bei ungültigen Anmeldeinformationen auftreten)
             e.printStackTrace();
             return false;
         }
     }
 
-    public AuthUserLogin()  {
+    public AuthUserLoginService()  {
 
     }
 

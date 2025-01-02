@@ -25,7 +25,7 @@ public class Hibernate {
     @ApplicationScoped
     public EntityManager createEntityManager() {
 
-        return    entityManagerFactory.createEntityManager();
+        return entityManagerFactory.createEntityManager();
 
     }
 }

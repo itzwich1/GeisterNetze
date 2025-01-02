@@ -54,11 +54,11 @@
                     <p:inputText id="laengengrad" value="#{meldungBean.laengengrad}" required="true"
                                  style="width: 100%; margin-bottom: 20px;" />
 
-                    <p:outputLabel for="groesse" value="Größe:" style="display: block; margin-bottom: 5px;" />
+                    <p:outputLabel for="groesse" value="Größe [m²]:" style="display: block; margin-bottom: 5px;" />
                     <p:inputText id="groesse" value="#{meldungBean.groesse}" required="true"
                                  style="width: 100%; margin-bottom: 20px;" />
 
-                    <p:commandButton value="Meldung" action="#{meldungBean.senden}"
+                    <p:commandButton value="Meldung abschicken" action="#{meldungBean.senden}"
                                      styleClass="ui-button-success" style="width: 100%; margin-top: 20px;" />
 
                 </h:form>
