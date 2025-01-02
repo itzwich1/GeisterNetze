@@ -3,6 +3,7 @@ package com.geisternetze.beans;
 
 import com.geisternetze.entities.Geisternetz;
 import com.geisternetze.entities.Person;
+import com.geisternetze.services.GeisternetzService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -18,11 +19,11 @@ import java.util.stream.Collectors;
 @RequestScoped
 public class GeisternetzBean {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-    EntityManager em = emf.createEntityManager();
+    @Inject
+    private GeisternetzService geisternetzService;
 
     @Inject
-    UserSessionBean usersession;
+    UserSessionBean userSession;
 
     // Filterkriterium für den Status
     private String filterStatus = "";
@@ -40,19 +41,6 @@ public class GeisternetzBean {
         this.filterStatus = filterStatus;
     }
 
-    public List<Geisternetz> getGeisternetzList() {
-        return em.createQuery("SELECT g FROM Geisternetz g", Geisternetz.class).getResultList();
-    }
-
-    public List<Geisternetz> getFilteredGeisternetzList() {
-        if (filterStatus == null || filterStatus.isEmpty()) {
-            return getGeisternetzList(); // Keine Filterung, alle Einträge anzeigen
-        }
-        return getGeisternetzList().stream()
-                .filter(netz -> netz.getStatus().name().equals(filterStatus))
-                .collect(Collectors.toList());
-    }
-
     // Getter und Setter für das ausgewählte Geisternetz
     public Geisternetz getSelectedNetz() {
         return selectedNetz;
@@ -60,6 +48,14 @@ public class GeisternetzBean {
 
     public void setSelectedNetz(Geisternetz selectedNetz) {
         this.selectedNetz = selectedNetz;
+    }
+
+    public List<Geisternetz> getGeisternetzList() {
+        return geisternetzService.getGeisternetzList();
+    }
+
+    public List<Geisternetz> getFilteredGeisternetzList() {
+        return geisternetzService.getFilteredGeisternetzList(filterStatus);
     }
 
     // Methode zum Anzeigen der Details eines ausgewählten Geisternetzes
@@ -72,29 +68,17 @@ public class GeisternetzBean {
 
     public void netzGeborgen(){
 
-        selectedNetz.setStatus(Geisternetz.Status.GEBORGEN);
-        selectedNetz.setGeborgenAm(LocalDateTime.now());
-
-        em.getTransaction().begin();
-
-        em.persist(selectedNetz);
-
-        em.getTransaction().commit();
+        if (selectedNetz != null) {
+            geisternetzService.markAsGeborgen(selectedNetz);
+        }
 
     }
 
     public void fuerBergungEintragen(){
 
-        Person berger = em.find(Person.class, usersession.getUserId());
-
-        selectedNetz.setBerger(berger);
-        selectedNetz.setStatus(Geisternetz.Status.BERGUNG_BEVORSTEHEND);
-
-        em.getTransaction().begin();
-
-        em.persist(selectedNetz);
-
-        em.getTransaction().commit();
+        if (selectedNetz != null) {
+            geisternetzService.assignBerger(selectedNetz, userSession.getUserId());
+        }
 
     }
 

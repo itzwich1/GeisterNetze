@@ -1,6 +1,6 @@
 package com.geisternetze.beans;
 
-import com.geisternetze.services.GeisternetzService;
+import com.geisternetze.services.GeisternetzMeldungService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class MeldungBean implements Serializable{
 
     @Inject
-    private GeisternetzService geisternetzService;
+    private GeisternetzMeldungService geisternetzMeldungService;
 
     private boolean anonym;
     private String vorname;
@@ -83,7 +83,7 @@ public class MeldungBean implements Serializable{
 
 
         try{
-            geisternetzService.meldeGeisternetz(this.anonym,this.vorname,this.nachname,this.telefonnummer,Double.parseDouble(this.breitengrad),Double.parseDouble(this.laengengrad),Integer.parseInt(this.groesse));
+            geisternetzMeldungService.meldeGeisternetz(this.anonym,this.vorname,this.nachname,this.telefonnummer,Double.parseDouble(this.breitengrad),Double.parseDouble(this.laengengrad),Integer.parseInt(this.groesse));
 
         }catch(Exception e){
             e.printStackTrace();

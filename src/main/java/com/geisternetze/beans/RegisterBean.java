@@ -19,7 +19,7 @@ public class RegisterBean {
     private String password;
     private String vorname;
     private String nachname;
-    private Person.Role role;
+    private Person.Role rolle;
     private int telefonnummer;
 
     // Getter und Setter
@@ -63,12 +63,12 @@ public class RegisterBean {
         this.nachname = nachname;
     }
 
-    public Person.Role getRole() {
-        return role;
+    public Person.Role getRolle() {
+        return rolle;
     }
 
-    public void setRole(Person.Role role) {
-        this.role = role;
+    public void setRolle(Person.Role rolle) {
+        this.rolle = rolle;
     }
 
     public int getTelefonnummer() {
@@ -86,7 +86,7 @@ public class RegisterBean {
         try{
 
             // Registrierung über den Service delegieren
-            registerService.registerUser(benutzername, password, email, vorname, nachname, role, telefonnummer);
+            registerService.registerUser(benutzername, password, email, vorname, nachname, rolle, telefonnummer);
 
             // Beispiel: Weiterleitung zur Login-Seite nach erfolgreicher Registrierung
             return "LoginPage.xhtml?faces-redirect=true";

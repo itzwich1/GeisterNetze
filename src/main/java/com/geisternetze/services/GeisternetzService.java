@@ -1,57 +1,46 @@
 package com.geisternetze.services;
 
+
 import com.geisternetze.entities.Geisternetz;
 import com.geisternetze.entities.Person;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-
+@Stateless
 public class GeisternetzService {
 
-    public void meldeGeisternetz(boolean anonym, String vorname, String nachname, String telefonnummer, double breitengrad, double laengengrad, int groesse) {
+    @PersistenceContext
+    private EntityManager em;
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-        EntityManager em = emf.createEntityManager();
+    public List<Geisternetz> getGeisternetzList() {
+        return em.createQuery("SELECT g FROM Geisternetz g", Geisternetz.class).getResultList();
+    }
 
-        Person person = new Person();
-
-        person.setVorname(vorname);
-        person.setRolle(Person.Role.MELDER);
-
-        if(!anonym){
-            person.setNachname(nachname);
-            person.setTelefonnummer(Integer.parseInt(telefonnummer));
+    public List<Geisternetz> getFilteredGeisternetzList(String filterStatus) {
+        if (filterStatus == null || filterStatus.isEmpty()) {
+            return getGeisternetzList(); // Keine Filterung, alle Einträge anzeigen
         }
+        return em.createQuery("SELECT g FROM Geisternetz g WHERE g.status = :status", Geisternetz.class)
+                .setParameter("status", Geisternetz.Status.valueOf(filterStatus))
+                .getResultList();
+    }
 
-        em.getTransaction().begin();
+    public void markAsGeborgen(Geisternetz geisternetz) {
+        geisternetz.setStatus(Geisternetz.Status.GEBORGEN);
+        geisternetz.setGeborgenAm(LocalDateTime.now());
+        em.merge(geisternetz); // Update der Daten
+    }
 
-        em.persist(person);
+    public void assignBerger(Geisternetz geisternetz, Long userId) {
+        Person berger = em.find(Person.class, userId);
 
-        // Neues Geisternetz erstellen
-        Geisternetz geisternetz = new Geisternetz();
-        geisternetz.setBreitengrad(breitengrad);
-        geisternetz.setLaengengrad(laengengrad);
-        geisternetz.setGroesse(groesse);
-        geisternetz.setStatus(Geisternetz.Status.GEMELDET);
-        geisternetz.setErfassungsdatum(LocalDateTime.now());
-        geisternetz.setMelder(person);
-
-        // Geisternetz speichern
-        em.persist(geisternetz);
-
-
-        em.getTransaction().commit();
-
-
-        // EntityManager schließen
-        em.close();
-        emf.close();
-
-
+        geisternetz.setBerger(berger);
+        geisternetz.setStatus(Geisternetz.Status.BERGUNG_BEVORSTEHEND);
+        em.merge(geisternetz); // Update der Daten
     }
 
 }
