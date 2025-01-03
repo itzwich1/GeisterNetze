@@ -1,5 +1,6 @@
 package com.geisternetze.beans;
 
+import com.geisternetze.entities.Person;
 import com.geisternetze.services.GeisternetzMeldungService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -14,13 +15,16 @@ public class MeldungBean implements Serializable{
     @Inject
     private GeisternetzMeldungService geisternetzMeldungService;
 
+    @Inject
+    UserSessionBean userSession;
+
     private boolean anonym;
     private String vorname;
     private String nachname;
-    private String telefonnummer;
-    private String breitengrad;
-    private String laengengrad;
-    private String groesse;
+    private Integer telefonnummer;
+    private Double breitengrad;
+    private Double laengengrad;
+    private Integer groesse;
 
     public boolean isAnonym() {
         return anonym;
@@ -46,44 +50,56 @@ public class MeldungBean implements Serializable{
         this.nachname = nachname;
     }
 
-    public String getTelefonnummer() {
+    public Integer getTelefonnummer() {
         return telefonnummer;
     }
 
-    public void setTelefonnummer(String telefonnummer) {
+    public void setTelefonnummer(Integer telefonnummer) {
         this.telefonnummer = telefonnummer;
     }
 
-    public String getBreitengrad() {
+    public Double getBreitengrad() {
         return breitengrad;
     }
 
-    public void setBreitengrad(String breitengrad) {
+    public void setBreitengrad(Double breitengrad) {
         this.breitengrad = breitengrad;
     }
 
-    public String getLaengengrad() {
+    public Double getLaengengrad() {
         return laengengrad;
     }
 
-    public void setLaengengrad(String laengengrad) {
+    public void setLaengengrad(Double laengengrad) {
         this.laengengrad = laengengrad;
     }
 
-    public String getGroesse() {
+    public Integer getGroesse() {
         return groesse;
     }
 
-    public void setGroesse(String groesse) {
+    public void setGroesse(Integer groesse) {
         this.groesse = groesse;
+    }
+
+    public void addGeisternetz(){
+
+        Person person = userSession.getPerson();
+
+        try{
+            geisternetzMeldungService.meldeGeisternetz(false,person.getVorname(),person.getNachname(),person.getTelefonnummer(),this.laengengrad,this.breitengrad, this.groesse);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     public void senden(){
         System.out.println("MeldungBean senden");
 
-
         try{
-            geisternetzMeldungService.meldeGeisternetz(this.anonym,this.vorname,this.nachname,this.telefonnummer,Double.parseDouble(this.breitengrad),Double.parseDouble(this.laengengrad),Integer.parseInt(this.groesse));
+            geisternetzMeldungService.meldeGeisternetz(this.anonym,this.vorname,this.nachname,this.telefonnummer,this.breitengrad,this.laengengrad,this.groesse);
 
         }catch(Exception e){
             e.printStackTrace();

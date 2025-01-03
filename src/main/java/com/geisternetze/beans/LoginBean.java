@@ -52,10 +52,10 @@ public class LoginBean implements Serializable {
 
         if(isAuthenticated){
 
-            System.out.println(userSession.getRolle().toString());
-            if(userSession.getRolle() == Person.Role.BERGER){
+            System.out.println(userSession.getPerson().getRolle().toString());
+            if(userSession.getPerson().getRolle() == Person.Role.BERGER){
                 return "DashboardBerger.xhtml?faces-redirect=true";
-            }else if(userSession.getRolle() == Person.Role.MELDER){
+            }else if(userSession.getPerson().getRolle() == Person.Role.MELDER){
                 return "DashboardMelder.xhtml?faces-redirect=true";
             }else{
                 System.out.println("Undefinierte Rolle");

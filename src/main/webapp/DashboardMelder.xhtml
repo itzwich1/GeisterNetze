@@ -14,15 +14,12 @@
         <title>Gemeldete Geisternetze</title>
     </h:head>
 
-
-
-
     <h:body>
         <div class="card">
             <h:form id="form">
 
-                <h1>Willkommen, #{userSessionBean.username}!</h1>
-                <p:dataTable id="geisternetz" var="netz" value="#{geisternetzBean.filteredGeisternetzList}" rowKey="#{netz.geisternetzID}"
+                <h1>Willkommen, #{userSessionBean.benutzername}!</h1>
+                <p:dataTable id="geisternetz" var="netz" value="#{geisternetzBean.gemeldetGeisternetzList}" rowKey="#{netz.geisternetzID}"
                              selection="#{geisternetzBean.selectedNetz}" selectionMode="single">
                     <f:facet name="header">
                         Gemeldete Gesiternetze
@@ -45,17 +42,24 @@
                     <p:column headerText="Gemeldet von">
                         <h:outputText value="#{netz.melder.vorname}" />
                     </p:column>
-                    <p:column headerText="Geborgen am">
-                        <h:outputText value="#{netz.geborgenAmFormatted}">
-                            <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-                        </h:outputText>
-                    </p:column>
                 </p:dataTable>
+
+                <h:panelGrid columns="2" styleClass="mb-3">
+                    <h:outputLabel for="longitude" value="Längengrad:" />
+                    <p:inputText id="longitude" value="#{meldungBean.laengengrad}" />
+
+                    <h:outputLabel for="latitude" value="Breitengrad:" />
+                    <p:inputText id="latitude" value="#{meldungBean.breitengrad}" />
+
+                    <h:outputLabel for="groesse" value="Größe:" />
+                    <p:inputText id="groesse" value="#{meldungBean.groesse}" />
+                </h:panelGrid>
+
+                <p:commandButton value="Weiteres Geisternetz melden" action="#{meldungBean.addGeisternetz}" update="geisternetz" />
 
             </h:form>
         </div>
     </h:body>
 
-    <h:outputLabel value="Hello, world"/>
 </f:view>
 </html>

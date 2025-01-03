@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 public class GeisternetzMeldungService {
 
-    public void meldeGeisternetz(boolean anonym, String vorname, String nachname, String telefonnummer, double breitengrad, double laengengrad, int groesse) {
+    public void meldeGeisternetz(boolean anonym, String vorname, String nachname, Integer telefonnummer, Double breitengrad, Double laengengrad, Integer groesse) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
@@ -23,7 +23,7 @@ public class GeisternetzMeldungService {
 
         if(!anonym){
             person.setNachname(nachname);
-            person.setTelefonnummer(Integer.parseInt(telefonnummer));
+            person.setTelefonnummer(telefonnummer);
         }
 
         em.getTransaction().begin();

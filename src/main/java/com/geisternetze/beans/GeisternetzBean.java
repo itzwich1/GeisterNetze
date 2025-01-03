@@ -58,6 +58,11 @@ public class GeisternetzBean {
         return geisternetzService.getFilteredGeisternetzList(filterStatus);
     }
 
+    //Liefert die Geisternetze mit dem Status gemaeldet
+    public List<Geisternetz> getGemeldetGeisternetzList() {
+        return geisternetzService.getFilteredGeisternetzList("GEMELDET");
+    }
+
     // Methode zum Anzeigen der Details eines ausgewählten Geisternetzes
     public void viewNetz() {
         if (selectedNetz != null) {
@@ -77,7 +82,7 @@ public class GeisternetzBean {
     public void fuerBergungEintragen(){
 
         if (selectedNetz != null) {
-            geisternetzService.assignBerger(selectedNetz, userSession.getUserId());
+            geisternetzService.assignBerger(selectedNetz, userSession.getPerson().getPersonID());
         }
 
     }

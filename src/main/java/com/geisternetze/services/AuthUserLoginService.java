@@ -33,9 +33,8 @@ public class AuthUserLoginService {
 
             if (login != null) {
                 // Benutzer-ID und Benutzername in die Session speichern
-                userSession.setUserId(login.getPerson().getPersonID());
-                userSession.setUsername(login.getBenutzername());
-                userSession.setRolle(login.getPerson().getRolle());
+                userSession.setPerson(login.getPerson());
+                userSession.setBenutzername(login.getBenutzername());
 
                 return true;
             }

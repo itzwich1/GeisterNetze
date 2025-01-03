@@ -11,38 +11,30 @@ import java.io.Serializable;
 @SessionScoped
 public class UserSessionBean implements Serializable {
 
-    private Long userId;
-    private String username;
-
-    public Person.Role getRolle() {
-        return rolle;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setRolle(Person.Role rolle) {
-        this.rolle = rolle;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
-    private Person.Role rolle;
+    private Person person;
 
-    public Long getUserId() {
-        return userId;
+    public String getBenutzername() {
+        return benutzername;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setBenutzername(String benutzername) {
+        this.benutzername = benutzername;
     }
 
-    public String getUsername() {
-        return username;
-    }
+    private String benutzername;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public void clearSession() {
-        this.userId = null;
-        this.username = null;
+        this.person = null;
+        this.benutzername = null;
     }
 
 }
