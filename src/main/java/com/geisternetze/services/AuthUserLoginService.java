@@ -35,15 +35,12 @@ public class AuthUserLoginService {
                 // Benutzer-ID und Benutzername in die Session speichern
                 userSession.setUserId(login.getPerson().getPersonID());
                 userSession.setUsername(login.getBenutzername());
+                userSession.setRolle(login.getPerson().getRolle());
 
-                // Rolle der Person aus der Datenbank abfragen
-                Person person = em.find(Person.class, login.getPerson().getPersonID());
-                if (person != null) {
-                    userSession.setRolle(person.getRolle());
-                }
+                return true;
             }
 
-            return login != null;
+            return false;
 
         } catch (Exception e) {
             e.printStackTrace();

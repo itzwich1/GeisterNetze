@@ -54,21 +54,16 @@ public class LoginBean implements Serializable {
 
             System.out.println(userSession.getRolle().toString());
             if(userSession.getRolle() == Person.Role.BERGER){
-                return "Dashboard.xhtml?faces-redirect=true";
+                return "DashboardBerger.xhtml?faces-redirect=true";
             }else if(userSession.getRolle() == Person.Role.MELDER){
-                return "Dashboard.xhtml?faces-redirect=true";
+                return "DashboardMelder.xhtml?faces-redirect=true";
             }else{
                 System.out.println("Undefinierte Rolle");
                 return "login.xhtml";
             }
-
-
         }else{
-
             System.out.println("Ungültige Anmeldedaten");
             return "login.xhtml";
         }
-
     }
-
 }
