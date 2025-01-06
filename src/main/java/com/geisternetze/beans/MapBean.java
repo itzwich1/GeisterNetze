@@ -1,8 +1,10 @@
 package com.geisternetze.beans;
 
 import com.geisternetze.entities.Geisternetz;
+import com.geisternetze.services.MapService;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.util.ArrayList;
@@ -19,8 +21,8 @@ import org.primefaces.model.map.*;
 @RequestScoped
 public class MapBean {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-    EntityManager em = emf.createEntityManager();
+    @Inject
+    private MapService mapService;
 
     private MapModel<Long> simpleModel;
     private LatLng initialCenter;
@@ -29,23 +31,11 @@ public class MapBean {
     public void init() {
         simpleModel = new DefaultMapModel();
 
-        List<Geisternetz> netze = em.createQuery(
-                "SELECT g FROM Geisternetz g WHERE g.status='GEMELDET' OR g.status='BERGUNG_BEVORSTEHEND'",
-                Geisternetz.class).getResultList();
+        List<Geisternetz> netze = mapService.getRelevantGeisternetze();
 
-        if (!netze.isEmpty()) {
-            Geisternetz firstNetz = netze.get(0);
-            initialCenter = new LatLng(firstNetz.getBreitengrad(), firstNetz.getLaengengrad());
-        } else {
-            initialCenter = new LatLng(51.1657, 10.4515); // Deutschland
-        }
+        initialCenter = mapService.getInitialCenter(netze);
 
-
-        for (Geisternetz netz : netze) {
-            LatLng coords = new LatLng(netz.getBreitengrad(), netz.getLaengengrad());
-            String description = "Netz ID: " + netz.getGeisternetzID() + ", Status: " + netz.getStatus();
-            simpleModel.addOverlay(new Marker(coords, description, netz.getGeisternetzID()));
-        }
+        mapService.populateMarkers(netze, simpleModel);
     }
 
     public MapModel<Long> getSimpleModel() {
