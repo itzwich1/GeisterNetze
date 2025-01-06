@@ -29,18 +29,24 @@ public class GeisternetzService {
                 .getResultList();
     }
 
-    public void markAsGeborgen(Geisternetz geisternetz) {
+    public void netzAlsGeborgenHinterlegen(Geisternetz geisternetz) {
         geisternetz.setStatus(Geisternetz.Status.GEBORGEN);
         geisternetz.setGeborgenAm(LocalDateTime.now());
         em.merge(geisternetz); // Update der Daten
     }
 
-    public void assignBerger(Geisternetz geisternetz, Long userId) {
-        Person berger = em.find(Person.class, userId);
+    public void assignBerger(Geisternetz geisternetz, Person berger) {
 
         geisternetz.setBerger(berger);
         geisternetz.setStatus(Geisternetz.Status.BERGUNG_BEVORSTEHEND);
         em.merge(geisternetz); // Update der Daten
+    }
+
+    public void setNetzVerschollen(Geisternetz geisternetz){
+
+        geisternetz.setStatus(Geisternetz.Status.VERSCHOLLEN);
+        em.merge(geisternetz); // Update der Daten
+
     }
 
 }

@@ -17,7 +17,7 @@
 
 
     <h:body>
-        <h1>Willkommen, #{userSessionBean.username}!</h1>
+        <h1>Willkommen, #{userSessionBean.benutzername}!</h1>
 
         <div class="card">
             <h:form id="form">
@@ -79,6 +79,8 @@
                     <p:menuitem value="Netz geborgen" update="geisternetz" icon="pi pi-check"
                                 action="#{geisternetzBean.netzGeborgen}" />
                     <p:menuitem value="Für Bergung eintragen" update="geisternetz" icon="pi pi-user-plus"
+                                action="#{geisternetzBean.fuerBergungEintragen}" />
+                    <p:menuitem value="Netz verschollen" update="geisternetz" icon="pi pi-user-plus"
                                 action="#{geisternetzBean.fuerBergungEintragen}" />
                 </p:contextMenu>
 
