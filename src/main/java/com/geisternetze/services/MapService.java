@@ -18,7 +18,7 @@ public class MapService {
 
     public List<Geisternetz> getRelevantGeisternetze() {
         return em.createQuery(
-                "SELECT g FROM Geisternetz g WHERE g.status='GEMELDET' OR g.status='BERGUNG_BEVORSTEHEND'",
+                "SELECT g FROM Geisternetz g WHERE g.status='GEMELDET'",
                 Geisternetz.class).getResultList();
     }
 

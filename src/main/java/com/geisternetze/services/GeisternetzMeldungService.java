@@ -2,19 +2,23 @@ package com.geisternetze.services;
 
 import com.geisternetze.entities.Geisternetz;
 import com.geisternetze.entities.Person;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceContext;
 
 import java.time.LocalDateTime;
 
-
+@Stateless
 public class GeisternetzMeldungService {
+
+    @PersistenceContext
+    private EntityManager em;
 
     public void meldeGeisternetz(boolean anonym, String vorname, String nachname, Integer telefonnummer, Double breitengrad, Double laengengrad, Integer groesse) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-        EntityManager em = emf.createEntityManager();
+
 
         Person person = new Person();
 
@@ -42,14 +46,7 @@ public class GeisternetzMeldungService {
         // Geisternetz speichern
         em.persist(geisternetz);
 
-
         em.getTransaction().commit();
-
-
-        // EntityManager schließen
-        em.close();
-        emf.close();
-
 
     }
 

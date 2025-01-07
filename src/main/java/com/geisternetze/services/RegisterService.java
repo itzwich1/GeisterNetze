@@ -8,23 +8,27 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceContext;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.time.LocalDateTime;
 
-@ApplicationScoped
+@Stateless
 public class RegisterService {
 
-    // EntityManagerFactory und EntityManager für die Datenbankoperationen
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-    private EntityManager em = emf.createEntityManager();
+    @PersistenceContext
+    private EntityManager em;
 
     public void registerUser(String benutzername, String password, String email,
                              String vorname, String nachname, Person.Role role, int phone) {
         try {
+
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
             // Erstellen und initialisieren der Login-Entität
             Login login = new Login();
             login.setBenutzername(benutzername);
-            login.setPasswort(password);
+            login.setPasswort(hashedPassword);
             login.setEmail(email);
             login.setErstelltAm(LocalDateTime.now());
 
@@ -38,11 +42,8 @@ public class RegisterService {
             // Verknüpfen der Login- und Person-Entitäten
             login.setPerson(person);
 
-            // Transaktion starten und persistieren
-            em.getTransaction().begin();
             em.persist(person);
             em.persist(login);
-            em.getTransaction().commit();
 
         } catch (Exception e) {
             e.printStackTrace();

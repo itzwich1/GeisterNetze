@@ -8,6 +8,7 @@ import com.geisternetze.entities.Person;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.persistence.*;
+import org.mindrot.jbcrypt.BCrypt;
 
 @Stateless
 public class AuthUserLoginService {
@@ -23,15 +24,14 @@ public class AuthUserLoginService {
 
             // Login-Abfrage
             TypedQuery<Login> loginQuery = em.createQuery(
-                    "SELECT l FROM Login l WHERE l.benutzername = :username AND l.passwort = :password",
+                    "SELECT l FROM Login l WHERE l.benutzername = :username",
                     Login.class
             );
             loginQuery.setParameter("username", username);
-            loginQuery.setParameter("password", password);
 
             Login login = loginQuery.getSingleResult();
 
-            if (login != null) {
+            if (login != null && BCrypt.checkpw(password, login.getPasswort())) {
                 // Benutzer-ID und Benutzername in die Session speichern
                 userSession.setPerson(login.getPerson());
                 userSession.setBenutzername(login.getBenutzername());
