@@ -23,7 +23,7 @@
 
                 <h:form id="meldungForm">
 
-                    <p:messages autoUpdate="true" style="margin-bottom: 20px;" />
+                    <p:messages id="messages" autoUpdate="true" closable="true" showSummary="true" style="margin-bottom: 20px;" />
 
                     <p:outputLabel for="anonym" value="Anonym:" style="display: block; margin-bottom: 5px;" />
                     <p:selectBooleanCheckbox id="anonym" value="#{meldungBean.anonym}"
@@ -48,17 +48,17 @@
 
                     <p:outputLabel for="breitengrad" value="Breitengrad:" style="display: block; margin-bottom: 5px;" />
                     <p:inputText id="breitengrad" value="#{meldungBean.breitengrad}" required="true"
-                                 style="width: 100%; margin-bottom: 20px;" />
+                                 style="width: 100%; margin-bottom: 20px;" validator="coordinateValidator"/>
 
                     <p:outputLabel for="laengengrad" value="Längengrad:" style="display: block; margin-bottom: 5px;" />
                     <p:inputText id="laengengrad" value="#{meldungBean.laengengrad}" required="true"
-                                 style="width: 100%; margin-bottom: 20px;" />
+                                 style="width: 100%; margin-bottom: 20px;" validator="coordinateValidator"/>
 
                     <p:outputLabel for="groesse" value="Größe [m²]:" style="display: block; margin-bottom: 5px;" />
                     <p:inputText id="groesse" value="#{meldungBean.groesse}" required="true"
                                  style="width: 100%; margin-bottom: 20px;" />
 
-                    <p:commandButton value="Meldung abschicken" action="#{meldungBean.senden}"
+                    <p:commandButton value="Meldung abschicken" action="#{meldungBean.senden}" update="messages"
                                      styleClass="ui-button-success" style="width: 100%; margin-top: 20px;" />
 
                 </h:form>

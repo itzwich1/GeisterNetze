@@ -18,14 +18,14 @@
                 <p:messages id="messages" autoUpdate="true" style="margin-bottom: 20px;" />
 
                 <h:form id="loginForm">
-                    <p:messages autoUpdate="true" closable="true" showDetail="true" style="color: red; margin-bottom: 20px;" />
+                    <p:messages autoUpdate="true" for="username" closable="true" style="color: red; margin-bottom: 20px;" />
 
                     <p:outputLabel for="username" value="Username:" style="display: block; margin-bottom: 5px;" />
-                    <p:inputText id="username" value="#{loginBean.username}" required="true"
+                    <p:inputText id="username" value="#{loginBean.username}" validator="emptyFieldValidator"
                                  style="width: 100%; margin-bottom: 20px;" />
 
                     <p:outputLabel for="password" value="Password:" style="display: block; margin-bottom: 5px;" />
-                    <p:password id="password" value="#{loginBean.password}" feedback="false" required="true"
+                    <p:password id="password" value="#{loginBean.password}" feedback="false" validator="emptyFieldValidator"
                                 style="width: 100%; margin-bottom: 20px;"/>
 
                     <p:commandButton value="Login" action="#{loginBean.doLogin}"
