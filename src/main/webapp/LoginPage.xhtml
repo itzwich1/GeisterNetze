@@ -15,10 +15,10 @@
     <h:body>
         <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9;">
             <p:panel header="Login" style="width: 400px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-                <p:messages autoUpdate="true" style="margin-bottom: 20px;" />
+                <p:messages id="messages" autoUpdate="true" style="margin-bottom: 20px;" />
 
                 <h:form id="loginForm">
-                    <p:messages autoUpdate="true" style="color: red; margin-bottom: 20px;" />
+                    <p:messages autoUpdate="true" closable="true" showDetail="true" style="color: red; margin-bottom: 20px;" />
 
                     <p:outputLabel for="username" value="Username:" style="display: block; margin-bottom: 5px;" />
                     <p:inputText id="username" value="#{loginBean.username}" required="true"
@@ -26,7 +26,7 @@
 
                     <p:outputLabel for="password" value="Password:" style="display: block; margin-bottom: 5px;" />
                     <p:password id="password" value="#{loginBean.password}" feedback="false" required="true"
-                                style="width: 100%; margin-bottom: 20px;" />
+                                style="width: 100%; margin-bottom: 20px;"/>
 
                     <p:commandButton value="Login" action="#{loginBean.doLogin}"
                                      update="username password messages"

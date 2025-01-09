@@ -5,6 +5,8 @@ import com.geisternetze.TestData.GenerateTestUsers;
 import com.geisternetze.entities.Person;
 import com.geisternetze.services.AuthUserLoginService;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
@@ -62,6 +64,8 @@ public class LoginBean implements Serializable {
                 return "login.xhtml";
             }
         }else{
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ungültige Anmeldedaten",""));
             System.out.println("Ungültige Anmeldedaten");
             return "login.xhtml";
         }
