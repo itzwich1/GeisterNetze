@@ -16,7 +16,7 @@ public class GeisternetzMeldungService {
     @PersistenceContext
     private EntityManager em;
 
-    public void meldeGeisternetz(boolean anonym, String vorname, String nachname, Integer telefonnummer, Double breitengrad, Double laengengrad, Integer groesse) {
+    public void meldeGeisternetz(boolean anonym, String vorname, String nachname, Long telefonnummer, Double breitengrad, Double laengengrad, Integer groesse) {
 
 
 

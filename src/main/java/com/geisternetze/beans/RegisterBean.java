@@ -20,7 +20,7 @@ public class RegisterBean {
     private String vorname;
     private String nachname;
     private Person.Role rolle;
-    private int telefonnummer;
+    private Long telefonnummer;
 
     // Getter und Setter
     public String getEmail() {
@@ -71,11 +71,11 @@ public class RegisterBean {
         this.rolle = rolle;
     }
 
-    public int getTelefonnummer() {
+    public Long getTelefonnummer() {
         return telefonnummer;
     }
 
-    public void setTelefonnummer(int telefonnummer) {
+    public void setTelefonnummer(Long telefonnummer) {
         this.telefonnummer = telefonnummer;
     }
 

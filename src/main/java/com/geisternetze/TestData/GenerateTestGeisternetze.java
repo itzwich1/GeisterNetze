@@ -24,21 +24,21 @@ public class GenerateTestGeisternetze {
                 Person melder1 = new Person();
                 melder1.setVorname("Anna");
                 melder1.setNachname("Schmidt");
-                melder1.setTelefonnummer(987654321);
+                melder1.setTelefonnummer(9876543L);
                 melder1.setRolle(Person.Role.MELDER);
 
                 // Beispielperson 2 erstellen
                 Person melder2 = new Person();
                 melder2.setVorname("Peter");
                 melder2.setNachname("Meier");
-                melder2.setTelefonnummer(567891234);
+                melder2.setTelefonnummer(567891234L);
                 melder2.setRolle(Person.Role.MELDER);
 
                 // Beispielperson 3 erstellen
                 Person melder3 = new Person();
                 melder3.setVorname("Lisa");
                 melder3.setNachname("Klein");
-                melder3.setTelefonnummer(234567890);
+                melder3.setTelefonnummer(234567890L);
                 melder3.setRolle(Person.Role.MELDER);
 
                 // Beispiel-Geisternetz 1 erstellen

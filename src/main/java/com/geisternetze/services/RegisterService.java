@@ -20,7 +20,7 @@ public class RegisterService {
     private EntityManager em;
 
     public void registerUser(String benutzername, String password, String email,
-                             String vorname, String nachname, Person.Role role, int phone) {
+                             String vorname, String nachname, Person.Role role, Long phone) {
         try {
 
             String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());

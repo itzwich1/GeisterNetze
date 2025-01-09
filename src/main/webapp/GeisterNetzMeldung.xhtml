@@ -33,29 +33,29 @@
                     </p:selectBooleanCheckbox>
 
                     <p:outputLabel for="vorname" value="Vorname:" style="display: block; margin-bottom: 5px;" />
-                    <p:inputText id="vorname" value="#{meldungBean.vorname}" required="true"
+                    <p:inputText id="vorname" value="#{meldungBean.vorname}" validator="emptyFieldValidator"
                                  style="width: 100%; margin-bottom: 20px;" />
 
                     <p:outputLabel for="nachname" value="Nachname:" style="display: block; margin-bottom: 5px;" />
                     <p:inputText id="nachname" value="#{meldungBean.nachname}"
-                                 disabled="#{meldungBean.anonym}" required="true"
+                                 disabled="#{meldungBean.anonym}" validator="emptyFieldValidator"
                                  style="width: 100%; margin-bottom: 20px;" />
 
                     <p:outputLabel for="telefonnummer" value="Telefonnummer:" style="display: block; margin-bottom: 5px;" />
                     <p:inputText id="telefonnummer" value="#{meldungBean.telefonnummer}"
-                                 disabled="#{meldungBean.anonym}" required="true"
+                                 disabled="#{meldungBean.anonym}" validator="emptyFieldValidator"
                                  style="width: 100%; margin-bottom: 20px;" />
 
                     <p:outputLabel for="breitengrad" value="Breitengrad:" style="display: block; margin-bottom: 5px;" />
-                    <p:inputText id="breitengrad" value="#{meldungBean.breitengrad}" required="true"
+                    <p:inputText id="breitengrad" value="#{meldungBean.breitengrad}"
                                  style="width: 100%; margin-bottom: 20px;" validator="coordinateValidator"/>
 
                     <p:outputLabel for="laengengrad" value="Längengrad:" style="display: block; margin-bottom: 5px;" />
-                    <p:inputText id="laengengrad" value="#{meldungBean.laengengrad}" required="true"
+                    <p:inputText id="laengengrad" value="#{meldungBean.laengengrad}"
                                  style="width: 100%; margin-bottom: 20px;" validator="coordinateValidator"/>
 
                     <p:outputLabel for="groesse" value="Größe [m²]:" style="display: block; margin-bottom: 5px;" />
-                    <p:inputText id="groesse" value="#{meldungBean.groesse}" required="true"
+                    <p:inputText id="groesse" value="#{meldungBean.groesse}" validator="emptyFieldValidator"
                                  style="width: 100%; margin-bottom: 20px;" />
 
                     <p:commandButton value="Meldung abschicken" action="#{meldungBean.senden}" update="messages"

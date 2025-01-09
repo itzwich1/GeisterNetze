@@ -24,7 +24,7 @@ public class Person {
     private String nachname;
 
     @Column( )
-    private int telefonnummer;
+    private Long telefonnummer;
 
     @Enumerated(EnumType.STRING) // Speichert den Enum-Wert als String (z. B. "ADMIN", "USER")
     @Column( nullable = false)
@@ -54,11 +54,11 @@ public class Person {
         this.nachname = nachname;
     }
 
-    public int getTelefonnummer() {
+    public Long getTelefonnummer() {
         return telefonnummer;
     }
 
-    public void setTelefonnummer(int telefonnummer) {
+    public void setTelefonnummer(Long telefonnummer) {
         this.telefonnummer = telefonnummer;
     }
 

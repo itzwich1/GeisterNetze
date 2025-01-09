@@ -28,7 +28,7 @@ public class GenerateTestUsers {
                 Person person = new Person();
                 person.setVorname("Max");
                 person.setNachname("Mustermann");
-                person.setTelefonnummer(123456789);
+                person.setTelefonnummer(123456789L);
                 person.setRolle(Person.Role.BERGER);
 
                 // Neues Login erstellen

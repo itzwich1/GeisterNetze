@@ -14,6 +14,12 @@ public class CoordinateValidator implements Validator<Double> {
     public void validate(FacesContext context, UIComponent component, Double value) throws ValidatorException {
         String componentId = component.getId();
 
+        if (value == null){
+            throw new ValidatorException(
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, componentId + " ist erforderlich", "Der Breitengrad muss zwischen -90 und 90 liegen.")
+            );
+        }
+
         if ("breitengrad".equals(componentId)) {
             if (value < -90 || value > 90) {
                 throw new ValidatorException(
