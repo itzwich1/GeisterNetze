@@ -15,10 +15,18 @@
     </h:head>
 
     <h:body>
+
+        <h1>Willkommen, #{userSessionBean.benutzername}!</h1>
+
+        <div class="text-end mb-3">
+            <h:form>
+                <h:commandButton value="Logout" action="#{userSessionBean.logout}" styleClass="btn btn-danger" />
+            </h:form>
+        </div>
+
         <div class="card">
             <h:form id="form">
 
-                <h1>Willkommen, #{userSessionBean.benutzername}!</h1>
                 <p:dataTable id="geisternetz" var="netz" value="#{geisternetzBean.gemeldetGeisternetzList}" rowKey="#{netz.geisternetzID}"
                              selection="#{geisternetzBean.selectedNetz}" selectionMode="single">
                     <f:facet name="header">

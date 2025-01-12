@@ -3,6 +3,7 @@ package com.geisternetze.beans;
 
 import com.geisternetze.entities.Person;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
@@ -23,6 +24,14 @@ public class UserSessionBean implements Serializable {
 
     public String getBenutzername() {
         return benutzername;
+    }
+
+    public String logout() {
+
+        clearSession();
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+
+        return "LoginPage.xhtml?faces-redirect=true";
     }
 
     public void setBenutzername(String benutzername) {

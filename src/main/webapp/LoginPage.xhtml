@@ -18,18 +18,20 @@
                 <p:messages id="messages" autoUpdate="true" style="margin-bottom: 20px;" />
 
                 <h:form id="loginForm">
-                    <p:messages autoUpdate="true" for="username" closable="true" style="color: red; margin-bottom: 20px;" />
 
-                    <p:outputLabel for="username" value="Username:" style="display: block; margin-bottom: 5px;" />
-                    <p:inputText id="username" value="#{loginBean.username}" validator="emptyFieldValidator"
+
+                    <p:message for="benutzername" display="text" styleClass="text-danger"/>
+                    <p:outputLabel for="benutzername" value="Benutzername:" style="display: block; margin-bottom: 5px;" />
+                    <p:inputText id="benutzername" value="#{loginBean.username}" required="true" requiredMessage="Benutzername ist erforderlich"
                                  style="width: 100%; margin-bottom: 20px;" />
 
-                    <p:outputLabel for="password" value="Password:" style="display: block; margin-bottom: 5px;" />
-                    <p:password id="password" value="#{loginBean.password}" feedback="false" validator="emptyFieldValidator"
+                    <p:message for="passwort" display="text" styleClass="text-danger"/>
+                    <p:outputLabel for="passwort" value="Passwort:" style="display: block; margin-bottom: 5px;" />
+                    <p:password id="passwort" value="#{loginBean.password}" feedback="false" required="true" requiredMessage="Passwort ist erforderlich"
                                 style="width: 100%; margin-bottom: 20px;"/>
 
                     <p:commandButton value="Login" action="#{loginBean.doLogin}"
-                                     update="username password messages"
+                                     update="@form"
                                      styleClass="ui-button-success" style="width: 100%; margin-bottom: 10px;" />
                 </h:form>
 

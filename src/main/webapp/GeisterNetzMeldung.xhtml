@@ -23,7 +23,7 @@
 
                 <h:form id="meldungForm">
 
-                    <p:messages id="messages" autoUpdate="true" closable="true" showSummary="true" style="margin-bottom: 20px;" />
+
 
                     <p:outputLabel for="anonym" value="Anonym:" style="display: block; margin-bottom: 5px;" />
                     <p:selectBooleanCheckbox id="anonym" value="#{meldungBean.anonym}"
@@ -32,33 +32,37 @@
                         <p:ajax update="vorname nachname telefonnummer" />
                     </p:selectBooleanCheckbox>
 
+                    <p:message for="vorname" display="text" styleClass="text-danger"/>
                     <p:outputLabel for="vorname" value="Vorname:" style="display: block; margin-bottom: 5px;" />
-                    <p:inputText id="vorname" value="#{meldungBean.vorname}" validator="emptyFieldValidator"
+                    <p:inputText id="vorname" value="#{meldungBean.vorname}" required="true" requiredMessage="Vorname ist erforderlich"
                                  style="width: 100%; margin-bottom: 20px;" />
 
                     <p:outputLabel for="nachname" value="Nachname:" style="display: block; margin-bottom: 5px;" />
                     <p:inputText id="nachname" value="#{meldungBean.nachname}"
-                                 disabled="#{meldungBean.anonym}" validator="emptyFieldValidator"
+                                 disabled="#{meldungBean.anonym}"
                                  style="width: 100%; margin-bottom: 20px;" />
 
                     <p:outputLabel for="telefonnummer" value="Telefonnummer:" style="display: block; margin-bottom: 5px;" />
                     <p:inputText id="telefonnummer" value="#{meldungBean.telefonnummer}"
-                                 disabled="#{meldungBean.anonym}" validator="emptyFieldValidator"
+                                 disabled="#{meldungBean.anonym}"
                                  style="width: 100%; margin-bottom: 20px;" />
 
+                    <p:message for="breitengrad" display="text" styleClass="text-danger"/>
                     <p:outputLabel for="breitengrad" value="Breitengrad:" style="display: block; margin-bottom: 5px;" />
-                    <p:inputText id="breitengrad" value="#{meldungBean.breitengrad}"
+                    <p:inputText id="breitengrad" value="#{meldungBean.breitengrad}" required="true"
                                  style="width: 100%; margin-bottom: 20px;" validator="coordinateValidator"/>
 
+                    <p:message for="laengengrad" display="text" styleClass="text-danger"/>
                     <p:outputLabel for="laengengrad" value="Längengrad:" style="display: block; margin-bottom: 5px;" />
                     <p:inputText id="laengengrad" value="#{meldungBean.laengengrad}"
                                  style="width: 100%; margin-bottom: 20px;" validator="coordinateValidator"/>
 
+                    <p:message for="groesse" display="text" styleClass="text-danger"/>
                     <p:outputLabel for="groesse" value="Größe [m²]:" style="display: block; margin-bottom: 5px;" />
-                    <p:inputText id="groesse" value="#{meldungBean.groesse}" validator="emptyFieldValidator"
+                    <p:inputText id="groesse" value="#{meldungBean.groesse}" required="true" requiredMessage="Größe ist erforderlich"
                                  style="width: 100%; margin-bottom: 20px;" />
 
-                    <p:commandButton value="Meldung abschicken" action="#{meldungBean.addGeisternetzOhneLogin}" update="messages"
+                    <p:commandButton value="Meldung abschicken" action="#{meldungBean.addGeisternetzOhneLogin}" update="@form"
                                      styleClass="ui-button-success" style="width: 100%; margin-top: 20px;" />
 
                 </h:form>

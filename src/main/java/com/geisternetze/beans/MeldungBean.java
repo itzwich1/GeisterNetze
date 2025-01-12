@@ -21,7 +21,7 @@ public class MeldungBean implements Serializable{
     private boolean anonym;
     private String vorname;
     private String nachname;
-    private Long telefonnummer;
+    private String telefonnummer;
     private Double breitengrad;
     private Double laengengrad;
     private Integer groesse;
@@ -50,11 +50,11 @@ public class MeldungBean implements Serializable{
         this.nachname = nachname;
     }
 
-    public Long getTelefonnummer() {
+    public String getTelefonnummer() {
         return telefonnummer;
     }
 
-    public void setTelefonnummer(Long telefonnummer) {
+    public void setTelefonnummer(String telefonnummer) {
         this.telefonnummer = telefonnummer;
     }
 

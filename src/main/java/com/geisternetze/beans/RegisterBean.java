@@ -20,7 +20,7 @@ public class RegisterBean {
     private String vorname;
     private String nachname;
     private Person.Role rolle;
-    private Long telefonnummer;
+    private String telefonnummer;
 
     // Getter und Setter
     public String getEmail() {
@@ -71,24 +71,19 @@ public class RegisterBean {
         this.rolle = rolle;
     }
 
-    public Long getTelefonnummer() {
+    public String getTelefonnummer() {
         return telefonnummer;
     }
 
-    public void setTelefonnummer(Long telefonnummer) {
+    public void setTelefonnummer(String telefonnummer) {
         this.telefonnummer = telefonnummer;
     }
 
     // Registrierungsmethode
     public String register() {
-        // Hier kannst du die Logik implementieren, um die Daten in die Datenbank zu speichern
 
         try{
-
-            // Registrierung über den Service delegieren
             registerService.registerUser(benutzername, password, email, vorname, nachname, rolle, telefonnummer);
-
-            // Beispiel: Weiterleitung zur Login-Seite nach erfolgreicher Registrierung
             return "LoginPage.xhtml?faces-redirect=true";
 
         }catch (Exception e) {
