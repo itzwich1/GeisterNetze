@@ -22,12 +22,12 @@ public class MapService {
                 Geisternetz.class).getResultList();
     }
 
-    public LatLng getInitialCenter(List<Geisternetz> netze) {
+    public LatLng getStartPosition(List<Geisternetz> netze) {
         if (!netze.isEmpty()) {
             Geisternetz firstNetz = netze.get(0);
             return new LatLng(firstNetz.getBreitengrad(), firstNetz.getLaengengrad());
         }
-        return new LatLng(51.1657, 10.4515); // Standard auf Deutschland
+        return new LatLng(53.851710, 8.205024);
     }
 
     public void populateMarkers(List<Geisternetz> netze, org.primefaces.model.map.MapModel<Long> mapModel) {

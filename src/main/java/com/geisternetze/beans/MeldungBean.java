@@ -95,7 +95,7 @@ public class MeldungBean implements Serializable{
 
     }
 
-    public void senden(){
+    public void addGeisternetzOhneLogin(){
         System.out.println("MeldungBean senden");
 
         try{

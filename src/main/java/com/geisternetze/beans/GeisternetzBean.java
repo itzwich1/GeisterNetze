@@ -74,7 +74,7 @@ public class GeisternetzBean {
     public void netzGeborgen(){
 
         if (selectedNetz != null) {
-            geisternetzService.netzAlsGeborgenHinterlegen(selectedNetz);
+            geisternetzService.geborgenHinterlegen(selectedNetz);
         }
 
     }
@@ -82,7 +82,7 @@ public class GeisternetzBean {
     public void fuerBergungEintragen(){
 
         if (selectedNetz != null) {
-            geisternetzService.assignBerger(selectedNetz, userSession.getPerson());
+            geisternetzService.bergungAngekuendigt (selectedNetz, userSession.getPerson());
         }
 
     }
@@ -90,7 +90,7 @@ public class GeisternetzBean {
     public void netzVerschollen(){
         if(selectedNetz != null){
 
-            geisternetzService.setNetzVerschollen(selectedNetz);
+            geisternetzService.netzVerschollenHinterlegen(selectedNetz);
         }
     }
 

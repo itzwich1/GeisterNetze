@@ -25,7 +25,7 @@ public class MapBean {
     private MapService mapService;
 
     private MapModel<Long> simpleModel;
-    private LatLng initialCenter;
+    private LatLng startPosition;
 
     @PostConstruct
     public void init() {
@@ -33,7 +33,7 @@ public class MapBean {
 
         List<Geisternetz> netze = mapService.getRelevantGeisternetze();
 
-        initialCenter = mapService.getInitialCenter(netze);
+        startPosition = mapService.getStartPosition(netze);
 
         mapService.populateMarkers(netze, simpleModel);
     }
@@ -42,8 +42,8 @@ public class MapBean {
         return simpleModel;
     }
 
-    public String getInitialCenter() {
-        return initialCenter.getLat() + "," + initialCenter.getLng();
+    public String getStartpos() {
+        return startPosition.getLat() + "," + startPosition.getLng();
     }
 
 }

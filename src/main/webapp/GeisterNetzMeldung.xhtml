@@ -58,7 +58,7 @@
                     <p:inputText id="groesse" value="#{meldungBean.groesse}" validator="emptyFieldValidator"
                                  style="width: 100%; margin-bottom: 20px;" />
 
-                    <p:commandButton value="Meldung abschicken" action="#{meldungBean.senden}" update="messages"
+                    <p:commandButton value="Meldung abschicken" action="#{meldungBean.addGeisternetzOhneLogin}" update="messages"
                                      styleClass="ui-button-success" style="width: 100%; margin-top: 20px;" />
 
                 </h:form>

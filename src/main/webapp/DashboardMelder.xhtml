@@ -45,11 +45,11 @@
                 </p:dataTable>
 
                 <h:panelGrid columns="2" styleClass="mb-3">
-                    <h:outputLabel for="longitude" value="Längengrad:" />
-                    <p:inputText id="longitude" value="#{meldungBean.laengengrad}" />
+                    <h:outputLabel for="laengengrad" value="Längengrad:" />
+                    <p:inputText id="laengengrad" value="#{meldungBean.laengengrad}" validator="coordinateValidator"/>
 
-                    <h:outputLabel for="latitude" value="Breitengrad:" />
-                    <p:inputText id="latitude" value="#{meldungBean.breitengrad}" />
+                    <h:outputLabel for="breitengrad" value="Breitengrad:" />
+                    <p:inputText id="breitengrad" value="#{meldungBean.breitengrad}" validator="coordinateValidator"/>
 
                     <h:outputLabel for="groesse" value="Größe:" />
                     <p:inputText id="groesse" value="#{meldungBean.groesse}" />
