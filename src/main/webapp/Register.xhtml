@@ -25,28 +25,28 @@
                 <p:message for="email" display="text" styleClass="text-danger"/>
 
                 <!-- Benutzername -->
-                <h:outputLabel for="username" value="Benutzername:" styleClass="form-label"/>
-                <p:inputText id="username" value="#{registerBean.benutzername}" required="true"
+                <h:outputLabel for="benutzername" value="Benutzername:" styleClass="form-label"/>
+                <p:inputText id="benutzername" value="#{registerBean.benutzername}" required="true"
                              styleClass="form-control" requiredMessage="Benutzername ist erforderlich"/>
-                <p:message for="username" display="text" styleClass="text-danger"/>
+                <p:message for="benutzername" display="text" styleClass="text-danger"/>
 
                 <!-- Passwort -->
-                <h:outputLabel for="password" value="Passwort:" styleClass="form-label"/>
-                <p:password id="password" value="#{registerBean.password}" required="true"
+                <h:outputLabel for="passwort" value="Passwort:" styleClass="form-label"/>
+                <p:password id="passwort" value="#{registerBean.password}" required="true"
                             styleClass="form-control" requiredMessage="Passwort ist erforderlich"/>
-                <p:message for="password" display="text" styleClass="text-danger"/>
+                <p:message for="passwort" display="text" styleClass="text-danger"/>
 
                 <!-- Vorname -->
-                <h:outputLabel for="firstname" value="Vorname:" styleClass="form-label"/>
-                <p:inputText id="firstname" value="#{registerBean.vorname}" required="true"
+                <h:outputLabel for="vorname" value="Vorname:" styleClass="form-label"/>
+                <p:inputText id="vorname" value="#{registerBean.vorname}" required="true"
                              styleClass="form-control" requiredMessage="Vorname ist erforderlich"/>
-                <p:message for="firstname" display="text" styleClass="text-danger"/>
+                <p:message for="vorname" display="text" styleClass="text-danger"/>
 
                 <!-- Nachname -->
-                <h:outputLabel for="lastname" value="Nachname:" styleClass="form-label"/>
-                <p:inputText id="lastname" value="#{registerBean.nachname}" required="true"
+                <h:outputLabel for="nachname" value="Nachname:" styleClass="form-label"/>
+                <p:inputText id="nachname" value="#{registerBean.nachname}" required="true"
                              styleClass="form-control" requiredMessage="Nachname ist erforderlich"/>
-                <p:message for="lastname" display="text" styleClass="text-danger"/>
+                <p:message for="nachname" display="text" styleClass="text-danger"/>
 
                 <!-- Rolle -->
                 <h:outputLabel for="role" value="Rolle:" styleClass="form-label"/>
@@ -59,10 +59,10 @@
                 <p:message for="role" display="text" styleClass="text-danger"/>
 
                 <!-- Telefonnummer -->
-                <h:outputLabel for="phone" value="Telefonnummer:" styleClass="form-label"/>
-                <p:inputText id="phone" value="#{registerBean.telefonnummer}" required="true"
+                <h:outputLabel for="telefonnummer" value="Telefonnummer:" styleClass="form-label"/>
+                <p:inputText id="telefonnummer" value="#{registerBean.telefonnummer}" required="true"
                              styleClass="form-control" requiredMessage="Telefonnummer ist erforderlich"/>
-                <p:message for="phone" display="text" styleClass="text-danger"/>
+                <p:message for="telefonnummer" display="text" styleClass="text-danger"/>
 
                 <!-- Registrieren-Button -->
                 <p:commandButton value="Registrieren" action="#{registerBean.register}"

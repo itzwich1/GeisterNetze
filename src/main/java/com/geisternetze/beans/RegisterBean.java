@@ -83,10 +83,14 @@ public class RegisterBean {
     public String register() {
 
         try{
-            registerService.registerUser(benutzername, password, email, vorname, nachname, rolle, telefonnummer);
-            return "LoginPage.xhtml?faces-redirect=true";
+            if(registerService.registerUser(benutzername, password, email, vorname, nachname, rolle, telefonnummer)){
+                return "LoginPage.xhtml?faces-redirect=true";
+            }else{
+                return null;
+            }
 
-        }catch (Exception e) {
+
+        }catch (IllegalArgumentException e) {
             e.printStackTrace();
             return null; // Fehlerfall behandeln
         }
